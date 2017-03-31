@@ -3,6 +3,7 @@ $(document).ready(function() {
 
   $("#submit").click(function(event){
 	event.preventDefault();
+
 	var breed = $('#breed').val();
 	console.log(breed);
 	var age = $("#age").val();
@@ -30,33 +31,37 @@ $(document).ready(function() {
 	  'age': age,
 	  'size': size 
 	});
-	
+
 	$.ajax({
 	  url: queryURL,
 	  method: "GET",
 	  crossDomain: true,
 	  dataType: "jsonp",
-
     }).done(function(response) {
- 		if(response.petfinder.pets){
+ 		if(response.petfinder.pets){	
   		  console.log(queryURL);
+          var results = response.response;
           console.log(response);
           console.log(response.petfinder.pets.pet);
           var theArrayOfNope = response.petfinder.pets.pet;
           theArrayOfNope.forEach(function(currentPet){
-			console.log(currentPet.name.$t); 
-
-      	  });
-	  	  // storing the data from the AJAX request in the results variable
-          var results = response.response;
- 		}else{
+			console.log("Name of dog: " + currentPet.name.$t); 
+      	  
+ 		  
+          var theNextArrayOfNope=currentPet.options;
+          console.log(theNextArrayOfNope);
+          var optionsArray=(theNextArrayOfNope.option);
+          optionsArray.forEach(function(){
+          	optionsArray.forEach(function(currentOption){
+          	console.log("Info about dog: " + currentOption.$t);
+          	});
+          });
+   		  });
+    	}else{
  			$("#error").text("No results found, try again.");
  		}
-  
+
       });
-    
-
-
   });
 });
 
