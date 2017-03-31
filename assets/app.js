@@ -1,4 +1,8 @@
-$("#submit").on("click", function(){
+ $(document).ready(function() {
+    $('select').material_select();
+
+$("#submit").click(function(event){
+	event.preventDefault();
 var breed = $('#breed').val();
 console.log(breed);
 var age = $("#age").val();
@@ -10,7 +14,7 @@ console.log(gender);
 var zipcode = $("#location").val();
 console.log(zipcode);
 var api_key = '96d7e760e6cf087c0470a585636831ff';
-});
+
  
 
 var queryURL= "http://api.petfinder.com/pet.find?";
@@ -21,11 +25,11 @@ queryURL += $.param({
 	'format': 'json',
 	'key': api_key,
 	'animal': "dog",
-	'sex': "F",
+	'sex': gender,
 	'location': zipcode, 
-	'age': "adult",
+	'age': age,
 
-	'size': "M"
+	'size': size 
 	
 	 
 });
@@ -47,8 +51,10 @@ $.ajax({
           // storing the data from the AJAX request in the results variable
           var results = response.response;
       });
+});
 
-  $(document).ready(function() {
-    $('select').material_select();
+ 
   });
+
+
 
