@@ -21,7 +21,7 @@ var queryURL= "http://api.petfinder.com/pet.find?";
 
 
 queryURL += $.param({
-	// 'breed': breed,
+	'breed': breed,
 	'format': 'json',
 	'key': api_key,
 	'animal': "dog",
@@ -42,19 +42,36 @@ $.ajax({
 .done(function(response) {
           console.log(queryURL);
 
+          var results = response.response;
+
           console.log(response);
           console.log(response.petfinder.pets.pet);
           var theArrayOfNope = response.petfinder.pets.pet;
           theArrayOfNope.forEach(function(currentPet){
-          	console.log(currentPet.name.$t);
+
+          	console.log("Name of dog: " + currentPet.name.$t);
+
+
+          	var theNextArrayOfNope=currentPet.options;
+          	
+          		console.log(theNextArrayOfNope);
+          		var optionsArray=(theNextArrayOfNope.option);
+          		optionsArray.forEach(function(){
+          			
+          	optionsArray.forEach(function(currentOption){
+          	console.log("Info about dog: " + currentOption.$t);
+          	 
           });
           // storing the data from the AJAX request in the results variable
-          var results = response.response;
+          
       });
 });
 
+});
+});
+});
  
-  });
+
 
 
 
