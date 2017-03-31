@@ -1,10 +1,29 @@
+
+// var breed =
+var age = "adult";
+var size = "medium";
+var gender = "female";
+var zipcode = 78723;
+var api_key = '96d7e760e6cf087c0470a585636831ff';
  
 
-
-var queryURL= "http://api.petfinder.com/pet.find?format=json&key=96d7e760e6cf087c0470a585636831ff&location=78723&animal=dog"
-
+var queryURL= "http://api.petfinder.com/pet.find?";
 
 
+queryURL += $.param({
+	// 'breed': breed,
+	'format': 'json',
+	'key': api_key,
+	
+	'animal': "dog",
+	'location': zipcode, 
+	'age': age,
+	'count': 10
+
+	// 'size': size, 
+	// 'sex': gender,
+	 
+});
 $.ajax({
           url: queryURL,
           method: "GET"
