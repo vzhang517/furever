@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Furever</title>
+  <title>Furever</title>
 
-	<!-- Added link to the jQuery Library -->
-    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-    <!-- link to materialize -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
-
-
-    <link rel="stylesheet" type="text/css" href="assets/style.css">	
+  <!-- Added link to the jQuery Library -->
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+          
+          
+  <link rel="stylesheet" type="text/css" href="assets/style.css">	
 
 </head>
 <body>
-	<div class="container">
-	</div>
-
-	<script src="assets/app.js"></script>
+  <div class="container">
+	  <div class="row">
+		  <form class="col s12">
+			  <div class="row">
+				  <div class="input-field col s12">
+				    <input placeholder="Ex: Austin, TX or 78701" id="location" type="search" class="validate">
+				    <label for="location">Location (required)</label>
+				  </div>
+			  </div>
+			  <div class="row">
+			    <div class="input-field col s12">
+			      <select multiple>
+			        <option value="" disabled selected>Choose Size</option>
+			        <option value="baby">Baby</option>
+			        <option value="young">Young</option>
+			        <option value="adult">Adult</option>
+			        <option value="senior">Senior</option>
+			      </select>
+			      <label>Size</label>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="input-field col s12">
+			      <select multiple>
+			        <option value="" disabled selected>Choose Gender</option>
+			        <option value="male">Male</option>
+			        <option value="female">Female</option>
+			        <option value="unknown">Unknown</option>
+			      </select>
+			      <label>Gender</label>
+			    </div>
+			  </div>			  
+		  </form>
+	  </div>
+  </div>
+  <script src="assets/app.js"></script>
 </body>
 </html>

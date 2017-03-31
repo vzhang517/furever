@@ -15,3 +15,7 @@ $.ajax({
           // storing the data from the AJAX request in the results variable
           var results = response.response;
       });
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
