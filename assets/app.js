@@ -1,10 +1,16 @@
-
-var breed = "german";
-var age = "adult";
-var size = "medium";
-var gender = "female";
-var zipcode = 78723;
+$("#submit").on("click", function(){
+var breed = $('#breed').val();
+console.log(breed);
+var age = $("#age").val();
+console.log(age);
+var size = $("#size").val();
+console.log(size);
+var gender = $("#gender").val();
+console.log(gender);
+var zipcode = $("#location").val();
+console.log(zipcode);
 var api_key = '96d7e760e6cf087c0470a585636831ff';
+});
  
 
 var queryURL= "http://api.petfinder.com/pet.find?";
