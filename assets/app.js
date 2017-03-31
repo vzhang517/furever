@@ -14,11 +14,9 @@ queryURL += $.param({
 	// 'breed': breed,
 	'format': 'json',
 	'key': api_key,
-	
 	'animal': "dog",
 	'location': zipcode, 
-	'age': age,
-	'count': 10
+	'age': age
 
 	// 'size': size, 
 	// 'sex': gender,
@@ -26,12 +24,19 @@ queryURL += $.param({
 });
 $.ajax({
           url: queryURL,
-          method: "GET"
+          method: "GET",
+          crossDomain: true,
+          dataType: "jsonp"
         })
 .done(function(response) {
           console.log(queryURL);
 
           console.log(response);
+          console.log(response.petfinder.pets.pet);
+          var theArrayOfNope = response.petfinder.pets.pet;
+          theArrayOfNope.forEach(function(currentPet){
+          	console.log(currentPet.name.$t);
+          });
           // storing the data from the AJAX request in the results variable
           var results = response.response;
       });
