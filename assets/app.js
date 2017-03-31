@@ -1,5 +1,5 @@
 
-// var breed =
+var breed = "german";
 var age = "adult";
 var size = "medium";
 var gender = "female";
@@ -15,11 +15,12 @@ queryURL += $.param({
 	'format': 'json',
 	'key': api_key,
 	'animal': "dog",
+	'sex': "F",
 	'location': zipcode, 
-	'age': age
+	'age': "adult",
 
-	// 'size': size, 
-	// 'sex': gender,
+	'size': "M"
+	
 	 
 });
 $.ajax({
