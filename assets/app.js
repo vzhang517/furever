@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('select').material_select();
+  $('.tooltipped').tooltip({delay: 50});
 
   $("#submit").click(function(event){
 	event.preventDefault();
@@ -18,7 +19,7 @@ $(document).ready(function() {
 	var queryURL= "http://api.petfinder.com/pet.find?";
 
 	if(zipcode === ""){
-		$("#error").text("Location is required.");
+		Materialize.toast('Location is required!', 3000);
 	}
 
 	queryURL += $.param({
@@ -58,7 +59,7 @@ $(document).ready(function() {
           });
    		  });
     	}else{
- 			$("#error").text("No results found, try again.");
+ 			Materialize.toast('No results, please modify search.', 3000);
  		}
 
       });
