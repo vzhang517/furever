@@ -72,10 +72,14 @@ $(document).ready(function() {
                         });
                     });
                 });
+            	$(".card-title").html(currentPet.name.$t);
+            	$(".activator").attr("src",thearrayOfDogPhotos[0]);    
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
       });
+    $("#search").css("display", "none");
+  	$("#results").css("display", "inline");    
   });
   	$("#newSearch").click(function(event){
   	event.preventDefault();
