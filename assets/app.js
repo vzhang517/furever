@@ -70,22 +70,73 @@ $(document).ready(function() {
                     var dogName=currentPet.name.$t;
                     var dogSize=currentPet.size.$t;
                     var dogAge=currentPet.age.$t;
+                    // Contact Info
+                    var addressOne;
+                    var addressTwo;
+                    var city;
+                    var email;
+                    var phone;
+                    var state;
+                    var zip;
 
+                    //console log options
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
 
-                    if(currentPet.media.photos != undefined){
+                
+
+                    if(currentPet.media.photos !== undefined){
                     var thearrayOfDogPhotos = currentPet.media.photos.photo;
                     for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
                         
                         var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
                         dogPicArray.push(dogPhotosToPush);
-                                   
+
+                                  
                     }
-                  };
+                }
+                console.log("Dog Pic Array: " + JSON.stringify(dogPicArray)); 
 
 
-                    console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
+   //////////////// Contact info pulled here and assigned to variables if it exists/////////    
+
+                    if(currentPet.contact.address1.$t !== "undefined"){
+                        addressOne = currentPet.contact.address1.$t;
+                    }
+                    if(currentPet.contact.address2.$t !== "undefined"){
+                        addressTwo = currentPet.contact.address2.$t;
+                    }
+                    if(currentPet.contact.city.$t){
+                        city = currentPet.contact.city.$t;
+                    }
+                    if(currentPet.contact.email.$t){
+                        email = currentPet.contact.email.$t;
+                    }
+                    if(currentPet.contact.phone.$t){
+                        phone = currentPet.contact.phone.$t;
+                    }
+                    if(currentPet.contact.city.$t){
+                        state = currentPet.contact.state.$t;
+                    }
+                    if(currentPet.contact.zip.$t){
+                        zip = currentPet.contact.zip.$t;
+                    };
+
+                    //console log contact info
+                    console.log("addressOne: " + addressOne);
+                    console.log("addressTwo: " + addressTwo);
+                    console.log("city: " + city);
+                    console.log("email: " + email);
+                    console.log("phone: " + phone);
+                    console.log("state: " + state);
+                    console.log("zip: " + zip);
+  
+                    
+                    // var hugeArray = bigAssResponseJSON.allPets;
+
+                    // hugeArray.forEach(function(currentObject){
+                    //     checkContactInfo(currentObject);
+                    // });       
 
 
                     var theNextArrayOfNope = currentPet.options;
@@ -100,7 +151,7 @@ $(document).ready(function() {
                           });
                           
 
-                        }else if(optionsArray != undefined){
+                        }else if(optionsArray !== undefined){
                           console.log(optionsArray.$t);
                       }
                     
