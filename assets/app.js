@@ -50,18 +50,51 @@ $.ajax({
           theArrayOfNope.forEach(function(currentPet){
 
           	console.log("Name of dog: " + currentPet.name.$t);
+          	var nameOfDog=currentPet.name.$t;
+          	var ageOfDog=currentPet.age.$t;
+          	console.log("age of dog: "+ ageOfDog);
 
+// iterates through contact for dog
+          	console.log(currentPet.contact);
 
+          
+          	// console.log("contacts info: " + contactObj);
+          	// var contactArray = Object.keys(contactObj);
+          	
+          	// console.log("Info about dog: " + contactArray);
+      
+          		// contactArray.forEach(function(currentIndex){
+          		// 	console.log("shelterAddress: "+ currentIndex.$t);
+
+          		// });
+
+          	// });
+          		// console.log(theContactArrayOfNope.keys(array));
+      
+          		// console.log("contactArray: " + theContactArrayOfNope);
+
+          		
+          	
+
+// iterates through options of dog, pushes to new array
           	var theNextArrayOfNope=currentPet.options;
           	
           		console.log(theNextArrayOfNope);
           		var optionsArray=(theNextArrayOfNope.option);
           		optionsArray.forEach(function(){
-          			
+          	var dogOptions=[];	
+          	var shelterAddress=[];	
           	optionsArray.forEach(function(currentOption){
           	console.log("Info about dog: " + currentOption.$t);
+          	
+          	dogOptions.push(currentOption.$t);
+          	         	
           	 
           });
+          	console.log(dogOptions); 
+
+
+
           // storing the data from the AJAX request in the results variable
           
       });
