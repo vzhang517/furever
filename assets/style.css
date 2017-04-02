@@ -1,3 +1,7 @@
-#results {
+#resultsPage {
+	display:none;
+}
+
+#favoritesPage {
 	display:none;
 }

@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('select').material_select();
+
     $('.tooltipped').tooltip({
         delay: 50
     });
@@ -20,6 +21,8 @@ $(document).ready(function() {
         var api_key = '96d7e760e6cf087c0470a585636831ff';
         var queryURL = "http://api.petfinder.com/pet.find?";
 
+        var dogResultsArray=[];
+
         if (zipcode === "") {
             Materialize.toast('Location is required!', 3000);
         }
@@ -33,26 +36,44 @@ $(document).ready(function() {
             'location': zipcode,
             'age': age,
             'size': size
-        });
+
+        }, true);
+        console.log(queryURL);
 
         $.ajax({
             url: queryURL,
             method: "GET",
             crossDomain: true,
-            dataType: "jsonp",
+            dataType: "jsonp"
         }).done(function(response) {
             if (response.petfinder.pets) {	
                 console.log(queryURL);
                 var results = response.response;
-                console.log(response);
-                console.log(response.petfinder.pets.pet);
+                console.log(results);
+               
                 var theArrayOfNope = response.petfinder.pets.pet;
+                console.log(theArrayOfNope);
+
+                var Dog = function(name, options, pics, size, age) {
+        
+                  this.name = name;
+                  this.options = options;
+                  this.pics = pics;
+                  this.size = size;
+                  this.age = age;
+                };
 
                 theArrayOfNope.forEach(function(currentPet) { 
                     var dogPicArray = [];
+                    var dogOptions=[];
+                    var dogName=currentPet.name.$t;
+                    var dogSize=currentPet.size.$t;
+                    var dogAge=currentPet.age.$t;
+
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
 
+                    if(currentPet.media.photos != undefined){
                     var thearrayOfDogPhotos = currentPet.media.photos.photo;
                     for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
                         
@@ -60,33 +81,62 @@ $(document).ready(function() {
                         dogPicArray.push(dogPhotosToPush);
                                    
                     }
+                  };
 
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
 
                     var theNextArrayOfNope = currentPet.options;
                     console.log(theNextArrayOfNope);
                     var optionsArray = (theNextArrayOfNope.option);
-                    optionsArray.forEach(function() {
-                        optionsArray.forEach(function(currentOption) {
+                    console.log(optionsArray);
+                    
+                        if(optionsArray===Array){
+                           optionsArray.forEach(function(currentOption) {
+                            dogOptions.push(currentOption.$t);
                             console.log("Info about dog: " + currentOption.$t);
-                        });
-                    });
+                          });
+                          
+
+                        }else if(optionsArray != undefined){
+                          console.log(optionsArray.$t);
+                      }
+                    
+                    
+
+                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge);
+                    console.log(newDog);
+                    dogResultsArray.push(newDog);
                 });
-            	$(".card-title").html(currentPet.name.$t);
-            	$(".activator").attr("src",thearrayOfDogPhotos[0]);    
+
+            	$("#search").css("display", "none");
+  				$("#resultsPage").css("display", "inline");    
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
+
       });
-    $("#search").css("display", "none");
-  	$("#results").css("display", "inline");    
+  console.log(dogResultsArray);
   });
   	$("#newSearch").click(function(event){
   	event.preventDefault();
   	$("#search").css("display", "inline");
-  	$("#results").css("display", "none");
+  	$("#resultsPage").css("display", "none");
   	})
 
+  	$("#favorites").click(function(event){
+  	event.preventDefault();
+  	$("#favoritesPage").css("display", "inline");
+  	$("#resultsPage").css("display", "none");
+  	})
+
+  	$("#results").click(function(event){
+  	event.preventDefault();
+  	$("#favoritesPage").css("display", "none");
+  	$("#resultsPage").css("display", "inline");
+  	})
 });
+
+
+            
 
 
