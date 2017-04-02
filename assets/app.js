@@ -55,6 +55,8 @@ $(document).ready(function() {
           optionsArray.forEach(function(){
           	optionsArray.forEach(function(currentOption){
           	console.log("Info about dog: " + currentOption.$t);
+          	$("#search").css("display", "none");
+    		$("#results").css("display", "inline");
           	});
           });
    		  });
@@ -63,7 +65,14 @@ $(document).ready(function() {
  		}
 
       });
+
   });
+  $("#newSearch").click(function(event){
+  	event.preventDefault();
+  	$("#search").css("display", "inline");
+  	$("#results").css("display", "none");
+  })
+
 });
 
 
