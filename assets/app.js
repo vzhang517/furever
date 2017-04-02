@@ -74,6 +74,7 @@ $(document).ready(function() {
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
 
+                    if(currentPet.media.photos != undefined){
                     var thearrayOfDogPhotos = currentPet.media.photos.photo;
                     for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
                         
@@ -81,6 +82,7 @@ $(document).ready(function() {
                         dogPicArray.push(dogPhotosToPush);
                                    
                     }
+                  };
 
 
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
