@@ -85,13 +85,12 @@ $(document).ready(function() {
 
                 
 
-                    if(currentPet.media.photos !== undefined){
+                    
                     var thearrayOfDogPhotos = currentPet.media.photos.photo;
                     for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
-                        
+                    if(thearrayOfDogPhotos[i].hasOwnProperty('$t')) {
                         var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
                         dogPicArray.push(dogPhotosToPush);
-
                                   
                     }
                 }
@@ -100,27 +99,41 @@ $(document).ready(function() {
 
    //////////////// Contact info pulled here and assigned to variables if it exists/////////    
 
-                    if(currentPet.contact.address1.$t !== "undefined"){
-                        addressOne = currentPet.contact.address1.$t;
-                    }
-                    if(currentPet.contact.address2.$t !== "undefined"){
+
+                    if(currentPet.contact.address1.hasOwnProperty('$t')) {
+                    addressOne = currentPet.contact.address1.$t;
+                    } else
+                    addressOne = "No address provided.";
+        
+                    if(currentPet.contact.address2.hasOwnProperty('$t')) {
                         addressTwo = currentPet.contact.address2.$t;
-                    }
-                    if(currentPet.contact.city.$t){
+                    } else
+                    addressTwo = "No address provided.";
+
+                    if(currentPet.contact.city.hasOwnProperty('$t')){
                         city = currentPet.contact.city.$t;
-                    }
-                    if(currentPet.contact.email.$t){
+                    } else
+                    city = "No city provided.";
+
+                    if(currentPet.contact.email.hasOwnProperty('$t')) {
                         email = currentPet.contact.email.$t;
-                    }
-                    if(currentPet.contact.phone.$t){
+                    } else
+                    email = "No email address provided.";
+
+                    if(currentPet.contact.phone.hasOwnProperty('$t')){
                         phone = currentPet.contact.phone.$t;
-                    }
-                    if(currentPet.contact.city.$t){
+                    } else
+                    phone = "No phone number provided.";
+
+                    if(currentPet.contact.state.hasOwnProperty('$t')) {
                         state = currentPet.contact.state.$t;
-                    }
-                    if(currentPet.contact.zip.$t){
+                    } else
+                    state = "No state provided.";
+
+                    if(currentPet.contact.zip.hasOwnProperty('$t')) {
                         zip = currentPet.contact.zip.$t;
-                    };
+                    } else
+                    zip = "No zipcode provided.";
 
                     //console log contact info
                     console.log("addressOne: " + addressOne);
@@ -129,14 +142,7 @@ $(document).ready(function() {
                     console.log("email: " + email);
                     console.log("phone: " + phone);
                     console.log("state: " + state);
-                    console.log("zip: " + zip);
-  
-                    
-                    // var hugeArray = bigAssResponseJSON.allPets;
-
-                    // hugeArray.forEach(function(currentObject){
-                    //     checkContactInfo(currentObject);
-                    // });       
+                    console.log("zip: " + zip);      
 
 
                     var theNextArrayOfNope = currentPet.options;
