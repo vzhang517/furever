@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     $("#submit").click(function(event) {
         event.preventDefault();
-       
+
         var breed = $('#breed').val();
         console.log(breed);
         var age = $("#age").val();
@@ -21,7 +21,7 @@ $(document).ready(function() {
         var api_key = '96d7e760e6cf087c0470a585636831ff';
         var queryURL = "http://api.petfinder.com/pet.find?";
 
-        var dogResultsArray=[];
+        var dogResultsArray = [];
 
         if (zipcode === "") {
             Materialize.toast('Location is required!', 3000);
@@ -51,25 +51,25 @@ $(document).ready(function() {
                 console.log(queryURL);
                 var results = response.response;
                 console.log(results);
-               
+
                 var theArrayOfNope = response.petfinder.pets.pet;
                 console.log(theArrayOfNope);
 
                 var Dog = function(name, options, pics, size, age) {
-        
-                  this.name = name;
-                  this.options = options;
-                  this.pics = pics;
-                  this.size = size;
-                  this.age = age;
+
+                    this.name = name;
+                    this.options = options;
+                    this.pics = pics;
+                    this.size = size;
+                    this.age = age;
                 };
 
-                theArrayOfNope.forEach(function(currentPet) { 
+                theArrayOfNope.forEach(function(currentPet) {
                     var dogPicArray = [];
-                    var dogOptions=[];
-                    var dogName=currentPet.name.$t;
-                    var dogSize=currentPet.size.$t;
-                    var dogAge=currentPet.age.$t;
+                    var dogOptions = [];
+                    var dogName = currentPet.name.$t;
+                    var dogSize = currentPet.size.$t;
+                    var dogAge = currentPet.age.$t;
                     // Contact Info
                     var addressOne;
                     var addressTwo;
@@ -83,57 +83,57 @@ $(document).ready(function() {
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
 
-                
 
-                    
+
+
                     var thearrayOfDogPhotos = currentPet.media.photos.photo;
                     for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
-                    if(thearrayOfDogPhotos[i].hasOwnProperty('$t')) {
-                        var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
-                        dogPicArray.push(dogPhotosToPush);
-                                  
+                        if (thearrayOfDogPhotos[i].hasOwnProperty('$t')) {
+                            var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
+                            dogPicArray.push(dogPhotosToPush);
+
+                        }
                     }
-                }
-                console.log("Dog Pic Array: " + JSON.stringify(dogPicArray)); 
+                    console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
 
 
-   //////////////// Contact info pulled here and assigned to relevant variable if key ($t) exists/////////    
-/////////////////// If key does not exist then variable is assigned a "No ... provided" message////
+                    //////////////// Contact info pulled here and assigned to relevant variable if key ($t) exists/////////    
+                    /////////////////// If key does not exist then variable is assigned a "No ... provided" message////
 
-                    if(currentPet.contact.address1.hasOwnProperty('$t')) {
-                    addressOne = currentPet.contact.address1.$t;
+                    if (currentPet.contact.address1.hasOwnProperty('$t')) {
+                        addressOne = currentPet.contact.address1.$t;
                     } else
-                    addressOne = "No address provided.";
-        
-                    if(currentPet.contact.address2.hasOwnProperty('$t')) {
+                        addressOne = "No address provided.";
+
+                    if (currentPet.contact.address2.hasOwnProperty('$t')) {
                         addressTwo = currentPet.contact.address2.$t;
                     } else
-                    addressTwo = "No address provided.";
+                        addressTwo = "No address provided.";
 
-                    if(currentPet.contact.city.hasOwnProperty('$t')){
+                    if (currentPet.contact.city.hasOwnProperty('$t')) {
                         city = currentPet.contact.city.$t;
                     } else
-                    city = "No city provided.";
+                        city = "No city provided.";
 
-                    if(currentPet.contact.email.hasOwnProperty('$t')) {
+                    if (currentPet.contact.email.hasOwnProperty('$t')) {
                         email = currentPet.contact.email.$t;
                     } else
-                    email = "No email address provided.";
+                        email = "No email address provided.";
 
-                    if(currentPet.contact.phone.hasOwnProperty('$t')){
+                    if (currentPet.contact.phone.hasOwnProperty('$t')) {
                         phone = currentPet.contact.phone.$t;
                     } else
-                    phone = "No phone number provided.";
+                        phone = "No phone number provided.";
 
-                    if(currentPet.contact.state.hasOwnProperty('$t')) {
+                    if (currentPet.contact.state.hasOwnProperty('$t')) {
                         state = currentPet.contact.state.$t;
                     } else
-                    state = "No state provided.";
+                        state = "No state provided.";
 
-                    if(currentPet.contact.zip.hasOwnProperty('$t')) {
+                    if (currentPet.contact.zip.hasOwnProperty('$t')) {
                         zip = currentPet.contact.zip.$t;
                     } else
-                    zip = "No zipcode provided.";
+                        zip = "No zipcode provided.";
 
                     //console log contact info
                     console.log("addressOne: " + addressOne);
@@ -142,26 +142,26 @@ $(document).ready(function() {
                     console.log("email: " + email);
                     console.log("phone: " + phone);
                     console.log("state: " + state);
-                    console.log("zip: " + zip);      
+                    console.log("zip: " + zip);
 
 
                     var theNextArrayOfNope = currentPet.options;
                     console.log(theNextArrayOfNope);
                     var optionsArray = (theNextArrayOfNope.option);
                     console.log(optionsArray);
-                    
-                        if(optionsArray===Array){
-                           optionsArray.forEach(function(currentOption) {
+
+                    if (optionsArray === Array) {
+                        optionsArray.forEach(function(currentOption) {
                             dogOptions.push(currentOption.$t);
                             console.log("Info about dog: " + currentOption.$t);
-                          });
-                          
+                        });
 
-                        }else if(optionsArray !== undefined){
-                          console.log(optionsArray.$t);
-                      }
-                    
-                    
+
+                    } else if (optionsArray !== undefined) {
+                        console.log(optionsArray.$t);
+                    }
+
+
 
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge);
                     console.log(newDog);
@@ -176,4 +176,3 @@ $(document).ready(function() {
     });
 
 });
-
