@@ -4,11 +4,22 @@
 
 #favoritesPage {
 	display:none;
-<<<<<<< HEAD
-=======
+
 }
 
 img {
 	margin-top: 10px;
->>>>>>> 75e475df240cdc6e9f62f2116b6a36fcba3173ea
+	height: 100%;
+}
+
+.results {
+	height:400px;
+}
+
+.card .card-action {
+	margin:0;
+}
+
+.btn-flat {
+	padding:10px;
 }
