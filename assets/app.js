@@ -9,15 +9,15 @@ $(document).ready(function() {
         event.preventDefault();
 
         var breed = $('#breed').val();
-        console.log(breed);
+        // console.log(breed);
         var age = $("#age").val();
-        console.log(age);
+        // console.log(age);
         var size = $("#size").val();
-        console.log(size);
+        // console.log(size);
         var gender = $("#gender").val();
-        console.log(gender);
+        // console.log(gender);
         var zipcode = $("#location").val();
-        console.log(zipcode);
+        // console.log(zipcode);
         var api_key = '96d7e760e6cf087c0470a585636831ff';
         var queryURL = "http://api.petfinder.com/pet.find?";
 
@@ -46,11 +46,12 @@ $(document).ready(function() {
             crossDomain: true,
             dataType: "jsonp"
         }).done(function(response) {
-            if (response.petfinder.pets) {
-
-                console.log(queryURL);
+            if (response.petfinder.pets) {	
+                // console.log(queryURL);
                 var results = response.response;
-                console.log(results);
+
+                // console.log(results);
+               
 
                 var theArrayOfNope = response.petfinder.pets.pet;
                 console.log(theArrayOfNope);
@@ -173,13 +174,44 @@ $(document).ready(function() {
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge);
                     console.log(newDog);
                     dogResultsArray.push(newDog);
+
+					function add(){
+					$("#cards").append("<div class='card sticky-action col s4'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>short description</p></div><div class='card-action'><span><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></span></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>Name</span><p>full description</p></div></div>")
+					}
+					add();
                 });
+
+            	$("#search").css("display", "none");
+  				$("#resultsPage").css("display", "inline");    
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
-            console.log(dogResultsArray);
-        });
+      });
+  console.log(dogResultsArray);
+  });
+  	$("#newSearch").click(function(event){
+  	event.preventDefault();
+  	$("#search").css("display", "inline");
+  	$("#resultsPage").css("display", "none");
+  	})
 
-    });
+  	$("#favorites").click(function(event){
+  	event.preventDefault();
+  	$("#favoritesPage").css("display", "inline");
+  	$("#resultsPage").css("display", "none");
+  	$(".favorited").css("display","inline");
+  	})
 
+  	$("#results").click(function(event){
+  	event.preventDefault();
+  	$("#favoritesPage").css("display", "none");
+  	$("#resultsPage").css("display", "inline");
+  	})
+
+  	$(document).on("click", "#like", function(){
+  		console.log(this);
+		 
+  	})
 });
+
+
