@@ -102,7 +102,9 @@ $(document).ready(function() {
 
                         }
                     }
-                } 
+                } else {
+                     dogPicArray.push("assets/images/plane-dog.jpg");
+                 }
 
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
 
