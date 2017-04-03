@@ -207,6 +207,7 @@ $(document).ready(function() {
             }
       });
   console.log(dogResultsArray);
+
   });
   	$("#newSearch").click(function(event){
   	event.preventDefault();
@@ -227,10 +228,6 @@ $(document).ready(function() {
   	$("#resultsPage").css("display", "inline");
   	})
 
-  	$(document).on("click", "#like", function(){
-  		console.log(this);
-		 
-  	})
 });
 
 
