@@ -98,42 +98,42 @@ $(document).ready(function() {
 
 
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////    
-                    /////////////////// If key does not exist then variable is assigned a "No ... provided" message////
+                    /////////////////// If key does not exist then variable is assigned a "Not provided" message////
 
                     if (currentPet.contact.address1.hasOwnProperty('$t')) {
                         addressOne = currentPet.contact.address1.$t;
                     } else
-                        addressOne = "No address provided.";
+                        addressOne = "Not provided.";
 
                     if (currentPet.contact.address2.hasOwnProperty('$t')) {
                         addressTwo = currentPet.contact.address2.$t;
                     } else
-                        addressTwo = "No address provided.";
+                        addressTwo = "Not provided.";
 
                     if (currentPet.contact.city.hasOwnProperty('$t')) {
                         city = currentPet.contact.city.$t;
                     } else
-                        city = "No city provided.";
+                        city = "Not provided.";
 
                     if (currentPet.contact.email.hasOwnProperty('$t')) {
                         email = currentPet.contact.email.$t;
                     } else
-                        email = "No email address provided.";
+                        email = "Not provided.";
 
                     if (currentPet.contact.phone.hasOwnProperty('$t')) {
                         phone = currentPet.contact.phone.$t;
                     } else
-                        phone = "No phone number provided.";
+                        phone = "Not provided.";
 
                     if (currentPet.contact.state.hasOwnProperty('$t')) {
                         state = currentPet.contact.state.$t;
                     } else
-                        state = "No state provided.";
+                        state = "Not provided.";
 
                     if (currentPet.contact.zip.hasOwnProperty('$t')) {
                         zip = currentPet.contact.zip.$t;
                     } else
-                        zip = "No zipcode provided.";
+                        zip = "Not provided.";
 
                     //console log contact info
                     console.log("addressOne: " + addressOne);
