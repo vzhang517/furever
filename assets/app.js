@@ -87,6 +87,7 @@ $(document).ready(function() {
 
 
 
+                   if (currentPet.media.photos.photo) {
                     var thearrayOfDogPhotos = currentPet.media.photos.photo;
                     for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
                         if (thearrayOfDogPhotos[i].hasOwnProperty('$t')) {
@@ -95,6 +96,8 @@ $(document).ready(function() {
 
                         }
                     }
+                }
+
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
 
 
