@@ -169,7 +169,7 @@ $(document).ready(function() {
                     dogResultsArray.push(newDog);
 
 					function add(){
-					$("#cards").append("<div class='card sticky-action col s4'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>short description</p></div><div class='card-action'><span><p id='like'>Like</p> <p id='dislike'>Dislike</p></span></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>Name</span><p>full description</p></div></div>")
+					$("#cards").append("<div class='card sticky-action col s4'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>short description</p></div><div class='card-action'><span><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></span></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>Name</span><p>full description</p></div></div>")
 					}
 					add();
                 });
@@ -201,9 +201,9 @@ $(document).ready(function() {
   	$("#resultsPage").css("display", "inline");
   	})
 
-  	$("#like").click(function(event){
-  		event.preventDefault();
-		console.log("got  it!");
+  	$(document).on("click", "#like", function(){
+  		console.log(this);
+		 
   	})
 });
 
