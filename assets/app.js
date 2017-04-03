@@ -55,6 +55,8 @@ $(document).ready(function() {
                 var theArrayOfNope = response.petfinder.pets.pet;
                 console.log(theArrayOfNope);
 
+
+                // Constructor for dog objects to collect individual info
                 var Dog = function(name, options, pics, size, age) {
 
                     this.name = name;
@@ -146,9 +148,14 @@ $(document).ready(function() {
 
 
                     var theNextArrayOfNope = currentPet.options;
-                    console.log(theNextArrayOfNope);
+                    
                     var optionsArray = (theNextArrayOfNope.option);
+
+                    // console options
+                    console.log(theNextArrayOfNope);
                     console.log(optionsArray);
+
+                    // check to see if options is an array (hence having more than one option), if so iterate through
 
                     if (optionsArray === Array) {
                         optionsArray.forEach(function(currentOption) {
@@ -156,13 +163,13 @@ $(document).ready(function() {
                             console.log("Info about dog: " + currentOption.$t);
                         });
 
-
+                    // if not an array, and also not undefined (empty), just display value found in object
                     } else if (optionsArray !== undefined) {
                         console.log(optionsArray.$t);
                     }
 
 
-
+                    // create a new dog object for every pet and their info using the Dog constructor
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge);
                     console.log(newDog);
                     dogResultsArray.push(newDog);
