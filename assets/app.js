@@ -62,13 +62,20 @@ $(document).ready(function() {
 
 
                 // Constructor for dog objects to collect individual info
-                var Dog = function(name, options, pics, size, age) {
+                var Dog = function(name, options, pics, size, age, address1, address2, city, email, phone, state, zip) {
 
                     this.name = name;
                     this.options = options;
                     this.pics = pics;
                     this.size = size;
                     this.age = age;
+                    this.address1 = address1;
+                    this.address1 = address1;
+                    this.city = city;
+                    this.email = email;
+                    this.phone = phone;
+                    this.state = state;
+                    this.zip = zip;
                 };
 
                 theArrayOfNope.forEach(function(currentPet) {
@@ -78,8 +85,8 @@ $(document).ready(function() {
                     var dogSize = currentPet.size.$t;
                     var dogAge = currentPet.age.$t;
                     // Contact Info
-                    var addressOne;
-                    var addressTwo;
+                    var address1;
+                    var address2;
                     var city;
                     var email;
                     var phone;
@@ -113,14 +120,14 @@ $(document).ready(function() {
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
 
                     if (currentPet.contact.address1.hasOwnProperty('$t')) {
-                        addressOne = currentPet.contact.address1.$t;
+                        address1 = currentPet.contact.address1.$t;
                     } else
-                        addressOne = "Not provided.";
+                        address1 = "Not provided.";
 
                     if (currentPet.contact.address2.hasOwnProperty('$t')) {
-                        addressTwo = currentPet.contact.address2.$t;
+                        address2 = currentPet.contact.address2.$t;
                     } else
-                        addressTwo = "Not provided.";
+                        address2 = "Not provided.";
 
                     if (currentPet.contact.city.hasOwnProperty('$t')) {
                         city = currentPet.contact.city.$t;
@@ -148,8 +155,8 @@ $(document).ready(function() {
                         zip = "Not provided.";
 
                     //console log contact info
-                    console.log("addressOne: " + addressOne);
-                    console.log("addressTwo: " + addressTwo);
+                    console.log("address1: " + address1);
+                    console.log("address2: " + address2);
                     console.log("city: " + city);
                     console.log("email: " + email);
                     console.log("phone: " + phone);
@@ -181,14 +188,14 @@ $(document).ready(function() {
 
 
                     // create a new dog object for every pet and their info using the Dog constructor
-                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge);
+                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, address1, address2, city, email, phone, state, zip);
                     console.log(newDog);
                     dogResultsArray.push(newDog);
 
 					function add(){
 
 
-					$("#cards").append("<div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>"+dogAge+" // "+dogSize+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogName+"</span><p>"+addressOne+"<br>"+city+", "+state+" "+zip+"<br>"+email+"</p></div></div>")
+					$("#cards").append("<div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>"+dogAge+" // "+dogSize+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogName+"</span><p>"+address1+"<br>"+city+", "+state+" "+zip+"<br>"+email+"</p></div></div>")
 					}
 					add();
                 });
