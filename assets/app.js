@@ -192,21 +192,34 @@ $(document).ready(function() {
                     console.log(newDog);
                     dogResultsArray.push(newDog);
 
-					function add(){
+			
 
 
-					$("#cards").append("<div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>"+dogAge+" // "+dogSize+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogName+"</span><p>"+address1+"<br>"+city+", "+state+" "+zip+"<br>"+email+"</p></div></div>")
-					}
-					add();
+				
+					
+				
                 });
 
             	$("#search").css("display", "none");
-  				$("#resultsPage").css("display", "inline");    
+  				$("#resultsPage").css("display", "inline");  
+
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
+
       });
   console.log(dogResultsArray);
+    for(i=0;i<dogResultsArray.length;i++){
+  	if(dogResultsArray[0]){
+  		$("#cards").append("<li class='current'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogResultsArray[i].pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].age+" // "+dogResultsArray[i].size+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].address1+"<br>"+dogResultsArray[i].city+", "+dogResultsArray[i].state+" "+dogResultsArray[i].zip+"<br>"+dogResultsArray[i].email+"</p></div></div></li>")
+  	}
+  	// else{ 
+  	// 	$("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogResultsArray[i].pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].age+" // "+dogResultsArray[i].size+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].address1+"<br>"+dogResultsArray[i].city+", "+dogResultsArray[i].state+" "+dogResultsArray[i].zip+"<br>"+dogResultsArray[i].email+"</p></div></div></li>")
+
+  	// }
+  }; 
+
+  	
 
   });
   	$("#newSearch").click(function(event){
