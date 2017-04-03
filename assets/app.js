@@ -94,8 +94,7 @@ $(document).ready(function() {
 
                         }
                     }
-                } else
-                    
+                } 
 
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
 
