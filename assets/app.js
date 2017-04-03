@@ -97,8 +97,8 @@ $(document).ready(function() {
                 console.log("Dog Pic Array: " + JSON.stringify(dogPicArray)); 
 
 
-   //////////////// Contact info pulled here and assigned to variables if it exists/////////    
-
+   //////////////// Contact info pulled here and assigned to relevant variable if key ($t) exists/////////    
+/////////////////// If key does not exist then variable is assigned a "No ... provided" message////
 
                     if(currentPet.contact.address1.hasOwnProperty('$t')) {
                     addressOne = currentPet.contact.address1.$t;
