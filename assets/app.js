@@ -47,13 +47,21 @@ $(document).ready(function() {
             dataType: "jsonp"
         }).done(function(response) {
             if (response.petfinder.pets) {	
-                console.log(queryURL);
+
+                // console.log(queryURL);
                 var results = response.response;
+
+                // console.log(results);
+
+                console.log(queryURL);
+
                
 
                 var theArrayOfNope = response.petfinder.pets.pet;
                 console.log(theArrayOfNope);
 
+
+                // Constructor for dog objects to collect individual info
                 var Dog = function(name, options, pics, size, age) {
 
                     this.name = name;
@@ -143,32 +151,39 @@ $(document).ready(function() {
 
 
                     var theNextArrayOfNope = currentPet.options;
-                    console.log(theNextArrayOfNope);
+                    
                     var optionsArray = (theNextArrayOfNope.option);
+
+                    // console options
+                    console.log(theNextArrayOfNope);
                     console.log(optionsArray);
 
-                    if (optionsArray === Array) {
-                        optionsArray.forEach(function(currentOption) {
+                    // check to see if options is an array (hence having more than one option), if so iterate through
+                    // if(theNextArrayOfNope.hasOwnProperty("options")){
+                        
+                    if(Array.isArray(optionsArray)){
+                    optionsArray.forEach(function(currentOption) {
                             dogOptions.push(currentOption.$t);
                             console.log("Info about dog: " + currentOption.$t);
                         });
-
-
-                    } else if (optionsArray !== undefined) {
-                        console.log(optionsArray.$t);
+                    // if not an array, and also not undefined (empty), just display value found in object
+                    }else if(optionsArray != undefined){
+                        dogOptions.push(optionsArray.$t)
                     }
+                    
 
 
-
+                    // create a new dog object for every pet and their info using the Dog constructor
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge);
                     console.log(newDog);
                     dogResultsArray.push(newDog);
 
 					function add(){
+
+
 					$("#cards").append("<div class='card sticky-action col s4'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogPicArray[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogName+"</span><p>"+dogAge+" // "+dogSize+"</p></div><div class='card-action'><span><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></span></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogName+"</span><p>"+addressOne+"<br>"+city+", "+state+" "+zip+"<br>"+email+"</p></div></div>")
 					}
 					add();
-				
                 });
 
             	$("#search").css("display", "none");
