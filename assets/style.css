@@ -19,50 +19,55 @@ header{
 
 
 .container{
-	display: flex;
+  display: flex;
     flex-wrap: wrap;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
+.input-field input[type=search] {
+  padding: 0;
+  width: 100%;
+}
+
 #resultsPage {
-	display:none;
+  display:none;
 }
 
 #favoritesPage {
-	display:none;
+  display:none;
 
 }
 
 .results .item{
-	height:400px;
-	display: flex;
+  height:400px;
+  display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: flex-start;
     align-content: flex-start;
-    -webkit-transform-origin: 50% 99%;
-  	transform-origin: 50% 99%;
+    -webkit-transform-origin: bottom;
+    transform-origin: bottom;
 }
 
 
 .card .card-action {
-	margin:0;
-	padding:0;
+  margin:0;
+  padding:0;
 }
 
 .card .card-image {
-	height:200px;
-	width: 100%;
-	margin-top: 10px;
-	display: flex;
+  height:200px;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
     align-items: center;
 }
 
 .cardcontainer {
   padding: 10px;
-  text-align: center;
+  text-align: left;
   width: 300px;
   display: flex;
   justify-content: center;
@@ -163,6 +168,15 @@ h2{
   font-size: 20px;
 }
 
+ .rotateButton {
+    position: absolute;
+    bottom: 2px;
+    right: 0;    
+}
+
+.btn-floating i {
+  line-height: 33px;
+}
 
 /*animations*/
 
@@ -208,4 +222,3 @@ h2{
     -webkit-transform: rotate(-40deg) translateY(-80px);
     opacity: 0;
   }
-}
