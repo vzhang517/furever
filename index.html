@@ -14,7 +14,7 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
           
-          
+<!--   <link rel="stylesheet" type="text/css" href="assets/tinderesque.css">   -->      
   <link rel="stylesheet" type="text/css" href="assets/style.css">	
 
 </head>
@@ -82,7 +82,11 @@
 	  </div>
 	</div>
 	<div class="row" id="resultsPage">
-	  <div class="row" id="cards">
+	  <div class="cardcontainer list row">
+	    <ul class="cardlist" id="cards">
+	    </ul>
+	    <button class="no">X</button>
+	    <button class="yes">✔</button>
 	  </div>
 	  <div class="row">
     	<button class="btn waves-effect waves-light" type="submit" name="action" id="favorites">Favorites
@@ -92,71 +96,7 @@
  	  </div>			 	  
 	</div>
 	<div class="row" id="favoritesPage">
-	  <div class="row">
-		  <div class="card sticky-action col s4">
-		    <div class="card-image waves-effect waves-block waves-light">
-		    <img class="activator" src="assets/images/doggo.jpeg">
-		    </div>
-		    <div class="card-content">
-		      <span class="card-title activator grey-text text-darken-4">Name</span>
-		      <p>short description</p>
-		    </div>
-		    <div class="card-action">
-		      <span><p id="like">Like</p> <p id="dislike">Dislike</p></span>	
-		    </div>
-		    <div class="card-reveal">
-		      <span class="card-title grey-text text-darken-4">Name</span>	
-		      <p>full description</p>
-		    </div>
-		  </div>
-		  <div class="card sticky-action col s4">
-		    <div class="card-image waves-effect waves-block waves-light">
-		    <img class="activator" src="assets/images/doggo.jpeg">
-		    </div>
-		    <div class="card-content">
-		      <span class="card-title activator grey-text text-darken-4">Name</span>
-		      <p>short description</p>
-		    </div>
-		    <div class="card-action">
-		      <span><p id="like">Like</p> <p id="dislike">Dislike</p></span>	
-		    </div>
-		    <div class="card-reveal">
-		      <span class="card-title grey-text text-darken-4">Name</span>	
-		      <p>full description</p>
-		    </div>
-		  </div>
-		  <div class="card sticky-action col s4">
-		    <div class="card-image waves-effect waves-block waves-light">
-		    <img class="activator" src="assets/images/doggo.jpeg">
-		    </div>
-		    <div class="card-content">
-		      <span class="card-title activator grey-text text-darken-4">Name</span>
-		      <p>short description</p>
-		    </div>
-		    <div class="card-action">
-		      <span><p id="like">Like</p> <p id="dislike">Dislike</p></span>	
-		    </div>
-		    <div class="card-reveal">
-		      <span class="card-title grey-text text-darken-4">Name</span>	
-		      <p>full description</p>
-		    </div>
-		  </div>
-		  <div class="card sticky-action col s4">
-		    <div class="card-image waves-effect waves-block waves-light">
-		    <img class="activator" src="assets/images/doggo.jpeg">
-		    </div>
-		    <div class="card-content">
-		      <span class="card-title activator grey-text text-darken-4">Name</span>
-		      <p>short description</p>
-		    </div>
-		    <div class="card-action">
-		      <span><p id="like">Like</p> <p id="dislike">Dislike</p></span>	
-		    </div>
-		    <div class="card-reveal">
-		      <span class="card-title grey-text text-darken-4">Name</span>	
-		      <p>full description</p>
-		    </div>
-		  </div>		  		  		  
+	  <div class="row" id="favorited">
 	  </div>
 	  <div class="row">
     	<button class="btn waves-effect waves-light" type="submit" name="action" id="results">Results
@@ -167,5 +107,6 @@
 	</div>
   </div>
   <script src="assets/app.js"></script>
+  <script src="assets/tinderesque.js"></script>
 </body>
 </html>

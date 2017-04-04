@@ -1,41 +1,24 @@
-.container{
-	display: flex;
-    flex-wrap: wrap;
-}
-
 #resultsPage {
-	display:none;
+  display:none;
 }
 
 #favoritesPage {
-	display:none;
+  display:none;
 
 }
 
-.results .item{
-	height:400px;
-	display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: flex-start;
-    -webkit-transform-origin: 50% 99%;
-  	transform-origin: 50% 99%;
+img {
+  margin-top: 10px;
+  height: 100%;
 }
-
-.card .card-action {
-	margin:0;
-	padding:0;
+/* Design of a card */
+.item {
+  text-align:center;
+  height: 400px;
+  display: block;
+  -webkit-transform-origin: 50% 99%;
+  transform-origin: 50% 99%;
 }
-
-.card .card-image {
-	height:200px;
-	width: 100%;
-	margin-top: 10px;
-	display: flex;
-    align-items: center;
-}
-
 .cardcontainer {
   padding: 10px;
   text-align: center;
@@ -55,11 +38,11 @@
 
 /* Button designs */
 
-.no, .yes, .nopes, .yays {
+.but-nope, .but-yay, .nopes, .yays {
   display: none;
 }
 
-.tinderesque .no, .tinderesque .yes,
+.tinderesque .but-nope, .tinderesque .but-yay,
 .tinderesque .nopes, .tinderesque .yays {
   display: inline-block;
 }
@@ -79,10 +62,10 @@
   outline: 0;
   background: #0f0;
 }
-.cardcontainer .no {
+.cardcontainer .but-nope {
   background: #c00;
 }
-.cardcontainer .no:focus {
+.cardcontainer .but-nope:focus {
   outline: 0;
   background: #f00;
 }
@@ -97,7 +80,9 @@
 }
 
 
-/*animations*/
+/*
+  Animations, isn't it 'fun' to repeat all of that, just for Safari? :)
+*/
 
 @keyframes yay {
   from {
