@@ -14,9 +14,7 @@
 	display:none;
 
 }
-li {
-	list-style-type: none;
-}
+
 .results .item{
 	height:400px;
 	display: flex;
