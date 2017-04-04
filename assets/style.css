@@ -1,6 +1,17 @@
+/*colors: #E8DDCB,
+RED #C44D58,
+LIGHT GREEN #9DE0AD,
+MEDIUM BLUE #45ADA8,
+DARK BLUE #547980,
+TAUPE   #E8DDCB,
+DARK GREY#594F4F,
+*/
+
 body, html{
   margin: 0;
   padding: 0;
+  background-color: rgba(232, 221, 203, 0.35);
+  color: #594F4F !important;
 }
 header{
 
@@ -19,54 +30,52 @@ header{
 
 
 .container{
-	display: flex;
-    flex-wrap: wrap;
-    display: flex;
+  display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .input-field input[type=search] {
-	padding: 0;
-	width: 100%;
+  padding: 0;
+  width: 100%;
 }
 
 #resultsPage {
-	display:none;
+  display:none;
 }
 
 #favoritesPage {
-	display:none;
+  display:none;
 
 }
 
 .results .item{
-	height:400px;
-	display: flex;
+  height:400px;
+  display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: flex-start;
     align-content: flex-start;
     -webkit-transform-origin: bottom;
-  	transform-origin: bottom;
+    transform-origin: bottom;
 }
 
 
 .card .card-action {
-	margin:0;
-	padding:0;
+  margin:0;
+  padding:0;
 }
 
 .card .card-image {
-	height:200px;
-	width: 100%;
-	margin-top: 10px;
-	display: flex;
+  height:200px;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
     align-items: center;
 }
 
 .card .card-content {
-	padding:10px;
+  padding:10px;
 }
 .cardcontainer {
   padding: 10px;
@@ -101,7 +110,7 @@ header{
 }
 
 .cardcontainer button {
-  background: #0c0;
+  background-color: #45ADA8;
   border: none;
   color: #fff;
   border-radius: 50% 50%;
@@ -113,7 +122,7 @@ header{
 }
 .cardcontainer button:focus {
   outline: 0;
-  background: #0f0;
+  background-color: #9DE0AD;
 }
 .cardcontainer .no {
   background: #c00;
@@ -183,6 +192,37 @@ h2{
   line-height: 33px;
 }
 
+button{
+  background-color: rgba(126, 171, 186, 0.92) !important;
+}
+
+button:hover{
+background-color: #9DE0AD !important;
+}
+
+#submit, #reset{
+ background-color: rgba(126, 171, 186, 0.92);
+ 
+}
+
+#submit:hover, #reset:hover{
+  background-color: #9DE0AD;
+}
+
+.card-title{
+  color: #594F4F !important;
+}
+button.no{
+  background-color: #C44D58 !important;
+}
+button.yes{
+
+  background-color: #9DE0AD !important;
+}
+
+
+
+
 /*animations*/
 
 @keyframes yay {
@@ -227,6 +267,7 @@ h2{
     -webkit-transform: rotate(-40deg) translateY(-80px);
     opacity: 0;
   }
+<<<<<<< HEAD
 
 }
 
@@ -241,3 +282,5 @@ h2{
     align-content: flex-start;
       }
 
+=======
+>>>>>>> origin

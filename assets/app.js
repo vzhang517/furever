@@ -19,6 +19,7 @@ $(document).ready(function() {
 
     $("#submit").click(function(event) {
         event.preventDefault();
+        
 
         var breed = $('#breed').val();
         var age = $("#age").val();
@@ -183,14 +184,14 @@ $(document).ready(function() {
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogSex, address1, address2, city, email, phone, state, zip);
                     dogResultsArray.push(newDog);
                 });
-				console.log(dogResultsArray);
+                console.log(dogResultsArray);
 
-	             // on click submit, hide search page and show results page
+                 // on click submit, hide search page and show results page
                 $("#search").css("display", "none");
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
                 dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect waves-teal'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
             } else {
@@ -214,8 +215,6 @@ $(document).ready(function() {
         $("#reset").click();
     });
 
-
-
     $("#favorites").click(function(event){
         event.preventDefault();
         $("#favoritesPage").css("display", "inline");
@@ -235,6 +234,8 @@ $(document).ready(function() {
 
 
 }); 
+ 
+tinderesque();
 
 
 
@@ -242,8 +243,6 @@ $(document).ready(function() {
 
 
 
-
-/////working with dynamically generated content so need to call function below///////// 
 $(document.body).on('click', '.rotateButton', function() {
     console.log('clicked');
 
@@ -278,3 +277,113 @@ $(document.body).on('click', '.rotateButton', function() {
         });
       }
 
+
+function tinderesque(){
+  var animating = false;
+
+  function animatecard(ev) {
+    if (animating === false) {
+      //element that triggered the event 
+      var button = ev.target;
+      if (button.className === 'no') {
+        // add class nope to parent div .cardcontainer
+        button.parentNode.classList.add('nope');
+        animating = true;
+        //send a reference to the button that was clicked, the container element, and a copy of the current card
+        // allows you to read card before it gets removed from document?
+        fireCustomEvent('nopecard',
+          {
+            origin: button,
+            container: button.parentNode,
+            item: button.parentNode.querySelector('.item')
+          }
+        );
+      }
+      if (button.className === 'yes') {
+        button.parentNode.classList.add('yes');
+        animating = true;
+        fireCustomEvent('yepcard',
+          {
+            origin: button,
+            container: button.parentNode,
+            item: button.parentNode.querySelector('.item')
+
+          }
+
+        // database.ref().push({
+        // name: name,
+        // role: role,
+        // start: start,
+        // rate: rate,  
+        // });
+        
+        );
+      }
+      if (button.classList.contains('current')) {
+        fireCustomEvent('cardchosen',
+          {
+            container: getContainer(button),
+            item: button
+          }
+        );
+      }
+    }
+  }
+  // custom event fires when things happen to cards
+  // get a payload that you can define
+  function fireCustomEvent(name, payload) {
+    var newevent = new CustomEvent(name, {
+      detail: payload
+    });
+    document.body.dispatchEvent(newevent);
+  }
+
+  function getContainer(elm) {
+    var origin = elm.parentNode;
+    if (!origin.classList.contains('cardcontainer')){
+      origin = origin.parentNode;
+    }
+    return origin;
+  }
+
+  function animationdone(ev) {
+    animating = false;
+    // get the container of the button
+    var origin = getContainer(ev.target);
+    if (ev.animationName === 'yay') {
+      origin.classList.remove('yes');
+
+      //grabbing the child div instead of the li might fix this
+      // look into selecting child node?
+      $("#favorited").append(origin.querySelector('.current'));
+    }
+    if (ev.animationName === 'nope') {
+      origin.classList.remove('nope');
+      origin.querySelector('.current').remove();
+    }
+    if (origin.classList.contains('list')) {
+      if (ev.animationName === 'nope' ||
+          ev.animationName === 'yay') {
+        //if the deck is empty, show favorites page
+        if (!origin.querySelector('.item')) {
+          fireCustomEvent('deckempty', {
+            origin: origin.querySelector('button'),
+            container: origin,
+            item: null
+          });
+          $("#resultsPage").css("display", "none");
+          $("#favoritesPage").css("display", "inline"); 
+        } else {
+          //else add current to the next li 
+          origin.querySelector('.item').classList.add('current');
+        }
+      }
+    }
+  }
+  document.body.addEventListener('animationend', animationdone);
+  document.body.addEventListener('webkitAnimationEnd', animationdone);
+  document.body.addEventListener('click', animatecard);
+  window.addEventListener('DOMContentLoaded', function(){
+    document.body.classList.add('tinderesque');
+  });
+};
