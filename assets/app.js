@@ -171,7 +171,7 @@ $(document).ready(function() {
   				$("#resultsPage").css("display", "inline"); 
   				//create a card for each dog 
   				dogResultsArray.forEach(function (dog, index, dogs) {
-			        $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dog.pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.age+" // "+dog.size+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"</p></div></div></li>");
+			        $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect waves-teal'> <i class='material-icons'>replay</i></button></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.age+" // "+dog.size+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"</p></div></div></li>");
 			        //add class 'current' to first li of div id cards
 			    }); $('#cards li:first').addClass('current');
             } else {
@@ -199,6 +199,32 @@ $(document).ready(function() {
 	  	$("#resultsPage").css("display", "inline");
 	});  	
 }); 
+
+/////working with dynamically generated content so need to call function below///////// 
+$(document.body).on('click', '.rotateButton', function() {
+    console.log('clicked');
+
+    //searches siblings (after click of rotateButton) of <a> element for attribute of "data-deg" and continues with function if set to "0" -- then rotates pic 90 degrees//
+
+    if ($(this).siblings().attr("data-deg") === "0") {
+        $(this).siblings().rotate(90);
+        $(this).siblings().attr("data-deg", "90");
+        console.log(this);
+        
+    } else if ($(this).siblings().attr("data-deg") === "90") {
+        $(this).siblings().rotate(180);
+        $(this).siblings().attr("data-deg", "180");
+
+    } else if ($(this).siblings().attr("data-deg") === "180") {
+        $(this).siblings().rotate(270);
+        $(this).siblings().attr("data-deg", "270");
+
+    } else if ($(this).siblings().attr("data-deg") === "270") {
+        $(this).siblings().rotate(0);
+        $(this).siblings().attr("data-deg", "0");
+
+    }
+});
 
 
 

@@ -96,6 +96,17 @@
   animation: nope 0.7s ease-out;
 }
 
+ .rotateButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;    
+}
+
+.btn-floating i {
+  line-height: 33px;
+  /*width: 30px;
+  height: 45px;*/
+}
 
 /*animations*/
 
@@ -141,4 +152,5 @@
     -webkit-transform: rotate(-40deg) translateY(-80px);
     opacity: 0;
   }
-}
+
+
