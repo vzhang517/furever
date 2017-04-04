@@ -128,6 +128,8 @@ div#search.row{
 }
 #favorited{
   list-style-type: none;
+  display:flex;
+  flex-wrap: wrap;
 }
 
  .rotateButton {

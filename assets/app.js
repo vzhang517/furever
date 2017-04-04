@@ -190,6 +190,11 @@ $(document).ready(function() {
         $("#resultsPage").css("display", "none");
         $("#reset").click();
     });
+    $("#newSearch2").click(function(event){
+    	$("#favoritesPage").css("display", "none");
+    	$("#search").css("display", "inline");
+    	$("#reset").click();
+    });
   	$("#favorites").click(function(event){
 	  	event.preventDefault();
 	  	$("#favoritesPage").css("display", "inline");
