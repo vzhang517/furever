@@ -47,6 +47,8 @@ $(document).ready(function() {
         }, true);
         console.log(queryURL);
 
+
+
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -198,13 +200,20 @@ $(document).ready(function() {
  		});
   	});
 	//button functions 
+
+     $("#newSearch2").click(function(event){
+        $("#favoritesPage").css("display", "none");
+        $("#search").css("display", "inline");
+        $("#reset").click();
+    });
+
     $("#newSearch").click(function(event){
         event.preventDefault();
         $("#search").css("display", "inline");
         $("#resultsPage").css("display", "none");
         $("#reset").click();
     });
-<<<<<<< HEAD
+
 
 
     $("#favorites").click(function(event){
@@ -228,34 +237,9 @@ $(document).ready(function() {
 }); 
 
 
-    var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 4
-        });
-      }
 
 
-=======
-    $("#newSearch2").click(function(event){
-    	$("#favoritesPage").css("display", "none");
-    	$("#search").css("display", "inline");
-    	$("#reset").click();
-    });
-  	$("#favorites").click(function(event){
-	  	event.preventDefault();
-	  	$("#favoritesPage").css("display", "inline");
-	  	$("#resultsPage").css("display", "none");
-	  	$(".favorited").css("display","inline");
-	});
 
-  	$("#results").click(function(event){
-	  	event.preventDefault();
-	  	$("#favoritesPage").css("display", "none");
-	  	$("#resultsPage").css("display", "inline");
-	});  	
-}); 
 
 
 
@@ -284,4 +268,13 @@ $(document.body).on('click', '.rotateButton', function() {
 
     }
 });
->>>>>>> origin
+
+
+    var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 4
+        });
+      }
+
