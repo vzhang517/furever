@@ -1,6 +1,17 @@
+/*colors: #E8DDCB,
+RED #C44D58,
+LIGHT GREEN #9DE0AD,
+MEDIUM BLUE #45ADA8,
+DARK BLUE #547980,
+TAUPE   #E8DDCB,
+DARK GREY#594F4F,
+*/
+
 body, html{
   margin: 0;
   padding: 0;
+  background-color: rgba(232, 221, 203, 0.35);
+  color: #594F4F !important;
 }
 header{
 
@@ -101,7 +112,7 @@ header{
 }
 
 .cardcontainer button {
-  background: #0c0;
+  background-color: #45ADA8;
   border: none;
   color: #fff;
   border-radius: 50% 50%;
@@ -113,7 +124,7 @@ header{
 }
 .cardcontainer button:focus {
   outline: 0;
-  background: #0f0;
+  background-color: #9DE0AD;
 }
 .cardcontainer .no {
   background: #c00;
@@ -182,6 +193,37 @@ h2{
 .btn-floating i {
   line-height: 33px;
 }
+
+button{
+  background-color: rgba(126, 171, 186, 0.92) !important;
+}
+
+button:hover{
+background-color: #9DE0AD !important;
+}
+
+#submit, #reset{
+ background-color: rgba(126, 171, 186, 0.92);
+ 
+}
+
+#submit:hover, #reset:hover{
+  background-color: #9DE0AD;
+}
+
+.card-title{
+  color: #594F4F !important;
+}
+button.no{
+  background-color: #C44D58 !important;
+}
+button.yes{
+
+  background-color: #9DE0AD !important;
+}
+
+
+
 
 /*animations*/
 
