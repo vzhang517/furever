@@ -197,7 +197,23 @@ $(document).ready(function() {
 	  	event.preventDefault();
 	  	$("#favoritesPage").css("display", "none");
 	  	$("#resultsPage").css("display", "inline");
-	});  	
+	}); 
+
+
+
+
+    function myMap() {
+    var mapProp= {
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+    };
+    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+    
+
+
+
+
 }); 
 
 
