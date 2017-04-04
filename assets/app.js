@@ -21,7 +21,7 @@ $(document).ready(function() {
         var api_key = '96d7e760e6cf087c0470a585636831ff';
         var queryURL = "http://api.petfinder.com/pet.find?";
 
-        var dogResultsArray = [];
+        var dogResultsArray=[];
 
         if (zipcode === "") {
             Materialize.toast('Location is required!', 3000);
