@@ -65,6 +65,9 @@ header{
     align-items: center;
 }
 
+.card .card-content {
+	padding:10px;
+}
 .cardcontainer {
   padding: 10px;
   text-align: left;

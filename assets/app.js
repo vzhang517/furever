@@ -3,6 +3,7 @@ $(document).ready(function() {
     $('.tooltipped').tooltip({
         delay: 50
     });
+    $('.materialboxed').materialbox();
 
     $("#submit").click(function(event) {
         event.preventDefault();
@@ -175,7 +176,7 @@ $(document).ready(function() {
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
                 dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect waves-teal'><i class='material-icons'>replay</i></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.age+" // "+dog.size+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"<br>"+dog.options+"</p></div></div></li>");
+                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect waves-teal'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.age+" // "+dog.size+" // "+dog.sex+"<br>"+dog.options+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
             } else {
