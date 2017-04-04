@@ -1,3 +1,23 @@
+body, html{
+  margin: 0;
+  padding: 0;
+}
+header{
+
+  background-image: url("images/weimaraner-puppy-dog-snout-97082.jpeg");
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  color: #dcd5d2;
+  text-shadow: 0px 0px 300px #000;
+  background-color: transparent;
+}
+
+
 .container{
 	display: flex;
     flex-wrap: wrap;
@@ -131,6 +151,24 @@ div#search.row{
   display:flex;
   flex-wrap: wrap;
 }
+.header.btn{
+  border-radius: 9px;
+  font-family: 'Oswald', sans-serif;
+  color: #dcd3ca;
+  text-decoration: none;
+  background-color: rgba(140, 170, 180, 0.74);
+
+}
+.header.btn:hover{
+  color: #fff;
+  
+}
+h1{
+  font-size: 40px;
+}
+h2{
+  font-size: 20px;
+}
 
  .rotateButton {
     position: absolute;
@@ -140,8 +178,6 @@ div#search.row{
 
 .btn-floating i {
   line-height: 33px;
-  /*width: 30px;
-  height: 45px;*/
 }
 
 /*animations*/
