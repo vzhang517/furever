@@ -170,14 +170,14 @@ $(document).ready(function() {
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogSex, address1, address2, city, email, phone, state, zip);
                     dogResultsArray.push(newDog);
                 });
-				console.log(dogResultsArray);
+                console.log(dogResultsArray);
 
-	             // on click submit, hide search page and show results page
+                 // on click submit, hide search page and show results page
                 $("#search").css("display", "none");
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
                 dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect waves-teal'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
             } else {
@@ -193,24 +193,22 @@ $(document).ready(function() {
         $("#reset").click();
     });
     $("#newSearch2").click(function(event){
-    	$("#favoritesPage").css("display", "none");
-    	$("#search").css("display", "inline");
-    	$("#reset").click();
+        $("#favoritesPage").css("display", "none");
+        $("#search").css("display", "inline");
+        $("#reset").click();
     });
-  	$("#favorites").click(function(event){
-	  	event.preventDefault();
-	  	$("#favoritesPage").css("display", "inline");
-	  	$("#resultsPage").css("display", "none");
-	  	$(".favorited").css("display","inline");
-	});
+    $("#favorites").click(function(event){
+        event.preventDefault();
+        $("#favoritesPage").css("display", "inline");
+        $("#resultsPage").css("display", "none");
+        $(".favorited").css("display","inline");
+    });
 
-  	$("#results").click(function(event){
-	  	event.preventDefault();
-	  	$("#favoritesPage").css("display", "none");
-	  	$("#resultsPage").css("display", "inline");
-	});  	
-
-
+    $("#results").click(function(event){
+        event.preventDefault();
+        $("#favoritesPage").css("display", "none");
+        $("#resultsPage").css("display", "inline");
+    });     
 }); 
 tinderesque();
 
