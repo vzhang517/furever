@@ -6,6 +6,11 @@
     justify-content: center;
 }
 
+.input-field input[type=search] {
+	padding: 0;
+	width: 100%;
+}
+
 #resultsPage {
 	display:none;
 }
