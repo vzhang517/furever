@@ -11,7 +11,9 @@
 	display:none;
 
 }
-
+li {
+	list-style-type: none;
+}
 .results .item{
 	height:400px;
 	display: flex;
@@ -19,8 +21,8 @@
     flex-direction: row;
     align-items: flex-start;
     align-content: flex-start;
-    -webkit-transform-origin: 50% 99%;
-  	transform-origin: 50% 99%;
+/*    -webkit-transform-origin: 100% 0;
+  	transform-origin: 100% 0;*/
 }
 
 .card .card-action {
