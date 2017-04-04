@@ -40,7 +40,7 @@ $(document).ready(function() {
             crossDomain: true,
             dataType: "jsonp"
         }).done(function(response) {
-            if (response.petfinder.pets) {	
+            if (response.petfinder.pets) {  
                 var results = response.response;
                 console.log(queryURL);
                 var theArrayOfNope = response.petfinder.pets.pet;
@@ -82,17 +82,17 @@ $(document).ready(function() {
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
 
-                	if (currentPet.media.hasOwnProperty("photos"))  {
-                		var thearrayOfDogPhotos = currentPet.media.photos.photo;
-                    	for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
-                        	if (thearrayOfDogPhotos[i].hasOwnProperty('$t') && (thearrayOfDogPhotos[i]['@size'] === "x")) {
-                            	var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
-                           	 	dogPicArray.push(dogPhotosToPush);
-                        	}
-                    	}
-                	} else {
+                    if (currentPet.media.hasOwnProperty("photos"))  {
+                        var thearrayOfDogPhotos = currentPet.media.photos.photo;
+                        for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
+                            if (thearrayOfDogPhotos[i].hasOwnProperty('$t') && (thearrayOfDogPhotos[i]['@size'] === "x")) {
+                                var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
+                                dogPicArray.push(dogPhotosToPush);
+                            }
+                        }
+                    } else {
                     dogPicArray.push("assets/images/plane-dog.jpg");
-               		}
+                    }
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////    
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
@@ -166,39 +166,36 @@ $(document).ready(function() {
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, address1, address2, city, email, phone, state, zip);
                     dogResultsArray.push(newDog);
                 });
-				// on click submit, hide search page and show results page
-            	$("#search").css("display", "none");
-  				$("#resultsPage").css("display", "inline"); 
-  				//create a card for each dog 
-  				dogResultsArray.forEach(function (dog, index, dogs) {
-			        $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dog.pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.age+" // "+dog.size+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"</p></div></div></li>");
-			        //add class 'current' to first li of div id cards
-			    }); $('#cards li:first').addClass('current');
+                // on click submit, hide search page and show results page
+                $("#search").css("display", "none");
+                $("#resultsPage").css("display", "inline"); 
+                //create a card for each dog 
+                dogResultsArray.forEach(function (dog, index, dogs) {
+                    $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dog.pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.age+" // "+dog.size+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"</p></div></div></li>");
+                    //add class 'current' to first li of div id cards
+                }); $('#cards li:first').addClass('current');
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
- 		});
-  	});
-	//button functions 
-  	$("#newSearch").click(function(event){
-	  	event.preventDefault();
-	  	$("#search").css("display", "inline");
-	  	$("#resultsPage").css("display", "none");
-	});
+        });
+    });
+    //button functions 
+    $("#newSearch").click(function(event){
+        event.preventDefault();
+        $("#search").css("display", "inline");
+        $("#resultsPage").css("display", "none");
+    });
 
-  	$("#favorites").click(function(event){
-	  	event.preventDefault();
-	  	$("#favoritesPage").css("display", "inline");
-	  	$("#resultsPage").css("display", "none");
-	  	$(".favorited").css("display","inline");
-	});
+    $("#favorites").click(function(event){
+        event.preventDefault();
+        $("#favoritesPage").css("display", "inline");
+        $("#resultsPage").css("display", "none");
+        $(".favorited").css("display","inline");
+    });
 
-  	$("#results").click(function(event){
-	  	event.preventDefault();
-	  	$("#favoritesPage").css("display", "none");
-	  	$("#resultsPage").css("display", "inline");
-	});  	
-}); 
-
-
-
+    $("#results").click(function(event){
+        event.preventDefault();
+        $("#favoritesPage").css("display", "none");
+        $("#resultsPage").css("display", "inline");
+    });     
+});
