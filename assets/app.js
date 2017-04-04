@@ -184,6 +184,7 @@ $(document).ready(function() {
         event.preventDefault();
         $("#search").css("display", "inline");
         $("#resultsPage").css("display", "none");
+        $("#reset").click();
     });
 
     $("#favorites").click(function(event){
