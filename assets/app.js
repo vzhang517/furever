@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('select').material_select();
-
     $('.tooltipped').tooltip({
         delay: 50
     });
@@ -9,15 +8,10 @@ $(document).ready(function() {
         event.preventDefault();
 
         var breed = $('#breed').val();
-        // console.log(breed);
         var age = $("#age").val();
-        // console.log(age);
         var size = $("#size").val();
-        // console.log(size);
         var gender = $("#gender").val();
-        // console.log(gender);
         var zipcode = $("#location").val();
-        // console.log(zipcode);
         var api_key = '96d7e760e6cf087c0470a585636831ff';
         var queryURL = "http://api.petfinder.com/pet.find?";
 
@@ -35,8 +29,8 @@ $(document).ready(function() {
             'sex': gender,
             'location': zipcode,
             'age': age,
-            'size': size
-
+            'size': size,
+            'count': 5
         }, true);
         console.log(queryURL);
 
@@ -47,19 +41,10 @@ $(document).ready(function() {
             dataType: "jsonp"
         }).done(function(response) {
             if (response.petfinder.pets) {	
-
-                // console.log(queryURL);
                 var results = response.response;
-
-                // console.log(results);
-
                 console.log(queryURL);
-
-               
-
                 var theArrayOfNope = response.petfinder.pets.pet;
                 console.log(theArrayOfNope);
-
 
                 // Constructor for dog objects to collect individual info
                 var Dog = function(name, options, pics, size, age, address1, address2, city, email, phone, state, zip) {
@@ -97,25 +82,18 @@ $(document).ready(function() {
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
 
-
-
-                   if (currentPet.media.hasOwnProperty("photos"))  {
-
-                    var thearrayOfDogPhotos = currentPet.media.photos.photo;
-                    for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
-                        if (thearrayOfDogPhotos[i].hasOwnProperty('$t') && (thearrayOfDogPhotos[i]['@size'] === "x")) {
-                            var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
-                            dogPicArray.push(dogPhotosToPush);
-
-                        }
-                    }
-                } else {
-                     dogPicArray.push("assets/images/plane-dog.jpg");
-                 }
-
+                	if (currentPet.media.hasOwnProperty("photos"))  {
+                		var thearrayOfDogPhotos = currentPet.media.photos.photo;
+                    	for (var i = 0; i < thearrayOfDogPhotos.length; i++) {
+                        	if (thearrayOfDogPhotos[i].hasOwnProperty('$t') && (thearrayOfDogPhotos[i]['@size'] === "x")) {
+                            	var dogPhotosToPush = thearrayOfDogPhotos[i].$t;
+                           	 	dogPicArray.push(dogPhotosToPush);
+                        	}
+                    	}
+                	} else {
+                    dogPicArray.push("assets/images/plane-dog.jpg");
+               		}
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
-
-
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////    
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
 
@@ -177,70 +155,50 @@ $(document).ready(function() {
                         
                     if(Array.isArray(optionsArray)){
                     optionsArray.forEach(function(currentOption) {
-                            dogOptions.push(currentOption.$t);
-                            console.log("Info about dog: " + currentOption.$t);
-                        });
+                        dogOptions.push(currentOption.$t);
+                        console.log("Info about dog: " + currentOption.$t);
+                    });
                     // if not an array, and also not undefined (empty), just display value found in object
                     }else if(optionsArray != undefined){
                         dogOptions.push(optionsArray.$t)
                     }
-                    
-
-
                     // create a new dog object for every pet and their info using the Dog constructor
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, address1, address2, city, email, phone, state, zip);
-                    console.log(newDog);
                     dogResultsArray.push(newDog);
-
-			
-
-
-				
-					
-				
                 });
-
+				// on click submit, hide search page and show results page
             	$("#search").css("display", "none");
-  				$("#resultsPage").css("display", "inline");  
-
+  				$("#resultsPage").css("display", "inline"); 
+  				//create a card for each dog 
+  				dogResultsArray.forEach(function (dog, index, dogs) {
+			        $("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dog.pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.age+" // "+dog.size+"</p></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"</p></div></div></li>");
+			        //add class 'current' to first li of div id cards
+			    }); $('#cards li:first').addClass('current');
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
-
-      });
-  console.log(dogResultsArray);
-    for(i=0;i<dogResultsArray.length;i++){
-  	if(dogResultsArray[0]){
-  		$("#cards").append("<li class='current'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogResultsArray[i].pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].age+" // "+dogResultsArray[i].size+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].address1+"<br>"+dogResultsArray[i].city+", "+dogResultsArray[i].state+" "+dogResultsArray[i].zip+"<br>"+dogResultsArray[i].email+"</p></div></div></li>")
-  	}
-  	// else{ 
-  	// 	$("#cards").append("<li class='item'><div class='card sticky-action col s4 results'><div class='card-image waves-effect waves-block waves-light'><img class='activator' src='"+dogResultsArray[i].pics[0]+"'></div><div class='card-content'><span class='card-title activator grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].age+" // "+dogResultsArray[i].size+"</p></div><div class='card-action'><a class='waves-effect waves-teal btn-flat' id='like'>Like</a><a class='waves-effect waves-teal btn-flat' id='no'>Not for Me</a></div><div class='card-reveal'><span class='card-title grey-text text-darken-4'>"+dogResultsArray[i].name+"</span><p>"+dogResultsArray[i].address1+"<br>"+dogResultsArray[i].city+", "+dogResultsArray[i].state+" "+dogResultsArray[i].zip+"<br>"+dogResultsArray[i].email+"</p></div></div></li>")
-
-  	// }
-  }; 
-
-  	
-
-  });
+ 		});
+  	});
+	//button functions 
   	$("#newSearch").click(function(event){
-  	event.preventDefault();
-  	$("#search").css("display", "inline");
-  	$("#resultsPage").css("display", "none");
-  	})
+	  	event.preventDefault();
+	  	$("#search").css("display", "inline");
+	  	$("#resultsPage").css("display", "none");
+	});
 
   	$("#favorites").click(function(event){
-  	event.preventDefault();
-  	$("#favoritesPage").css("display", "inline");
-  	$("#resultsPage").css("display", "none");
-  	$(".favorited").css("display","inline");
-  	})
+	  	event.preventDefault();
+	  	$("#favoritesPage").css("display", "inline");
+	  	$("#resultsPage").css("display", "none");
+	  	$(".favorited").css("display","inline");
+	});
 
   	$("#results").click(function(event){
-  	event.preventDefault();
-  	$("#favoritesPage").css("display", "none");
-  	$("#resultsPage").css("display", "inline");
-  	})
+	  	event.preventDefault();
+	  	$("#favoritesPage").css("display", "none");
+	  	$("#resultsPage").css("display", "inline");
+	});  	
+}); 
 
-});
 
 
