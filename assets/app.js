@@ -9,7 +9,7 @@ $(document).ready(function() {
         event.preventDefault();
         //clear results before every search
         $("#cards").html(" ");
-
+        //grabbing user input from form 
         var breed = $('#breed').val();
         var age = $("#age").val();
         var size = $("#size").val();
@@ -44,13 +44,12 @@ $(document).ready(function() {
             dataType: "jsonp"
         }).done(function(response) {
             if (response.petfinder.pets) {  
-                var results = response.response;
                 console.log(queryURL);
-                var theArrayOfNope = response.petfinder.pets.pet;
-                console.log(theArrayOfNope);
+                var pets = response.petfinder.pets.pet;
+                console.log(pets);
 
                 // Constructor for dog objects to collect individual info
-                var Dog = function(name, options, pics, size, age, sex, address1, address2, city, email, phone, state, zip) {
+                var Dog = function(name, options, pics, size, age, sex, breeds, address1, address2, city, email, phone, state, zip) {
 
                     this.name = name;
                     this.options = options;
@@ -58,6 +57,7 @@ $(document).ready(function() {
                     this.size = size;
                     this.age = age;
                     this.sex= sex;
+                    this.breeds = breeds;
                     this.address1 = address1;
                     this.address2 = address2;
                     this.city = city;
@@ -67,13 +67,14 @@ $(document).ready(function() {
                     this.zip = zip;
                 };
 
-                theArrayOfNope.forEach(function(currentPet) {
+                pets.forEach(function(currentPet) {
                     var dogPicArray = [];
                     var dogOptions = [];
                     var dogName = currentPet.name.$t;
                     var dogSize = currentPet.size.$t;
                     var dogAge = currentPet.age.$t;
                     var dogSex = currentPet.sex.$t;
+                    var dogBreed = [];
                     // Contact Info
                     var address1;
                     var address2;
@@ -86,6 +87,14 @@ $(document).ready(function() {
                     //console log options
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
+
+                    if(Array.isArray(currentPet.breeds.breed)){
+                        currentPet.breeds.breed.forEach(function(eachBreed){
+                            dogBreed.push(" "+eachBreed.$t);
+                        });
+                    } else {
+                        dogBreed.push(currentPet.breeds.breed.$t);
+                    };
 
                     if (currentPet.media.hasOwnProperty("photos"))  {
                         var thearrayOfDogPhotos = currentPet.media.photos.photo;
@@ -168,7 +177,7 @@ $(document).ready(function() {
                         dogOptions.push(optionsArray.$t)
                     }
                     // create a new dog object for every pet and their info using the Dog constructor
-                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogSex, address1, address2, city, email, phone, state, zip);
+                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogSex, dogBreed, address1, address2, city, email, phone, state, zip);
                     dogResultsArray.push(newDog);
                 });
                 console.log(dogResultsArray);
@@ -178,7 +187,7 @@ $(document).ready(function() {
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
                 dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+                    $("#cards").append("<li class='item'><div class='card results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breeds+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
             } else {
