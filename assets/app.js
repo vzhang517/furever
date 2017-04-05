@@ -187,6 +187,18 @@ $(document).ready(function() {
         });
     });
     //button functions 
+
+    $(".header").click(function(event){
+        event.preventDefault();
+        var linkHref= $(this).attr("href");
+        $("html, body").animate({
+            scrollTop: $(linkHref).offset().top
+        });
+       setTimeout(function(){
+       $("header").css("display", "none");
+   }, 700);
+
+    })
     $("#newSearch").click(function(event){
         event.preventDefault();
         $("#search").css("display", "inline");
