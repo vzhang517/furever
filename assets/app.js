@@ -194,7 +194,7 @@ $(document).ready(function() {
         });
        setTimeout(function(){
        $("header").css("display", "none");
-   }, 800);
+   }, 700);
 
     })
     //button functions 
