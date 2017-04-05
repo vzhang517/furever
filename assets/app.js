@@ -186,8 +186,6 @@ $(document).ready(function() {
             }
         });
     });
-
-
     //button functions 
     $("#newSearch").click(function(event){
         event.preventDefault();
@@ -343,3 +341,4 @@ function tinderesque(){
     document.body.classList.add('tinderesque');
   });
 };
+
