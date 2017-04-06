@@ -87,11 +87,12 @@ $(document).ready(function() {
                     //console log options
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
-
+                    //if breed is an array, push each $t to dogBreed array
                     if(Array.isArray(currentPet.breeds.breed)){
                         currentPet.breeds.breed.forEach(function(eachBreed){
                             dogBreed.push(" "+eachBreed.$t);
                         });
+                      //if not an array, and also not undefined (empty), just display value found in object  
                     } else {
                         dogBreed.push(currentPet.breeds.breed.$t);
                     };
@@ -186,8 +187,8 @@ $(document).ready(function() {
                 $("#search").css("display", "none");
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
-                dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breeds+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+                dogResultsArray.forEach(function (dog, index) {
+                    $("#cards").append("<li class='item'><div class='card results'><div class='card-image materialboxed'><img data-deg='0'   src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></button></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breeds+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
             } else {

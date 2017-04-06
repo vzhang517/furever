@@ -42,16 +42,12 @@ header{
 
 #search {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 #searchCard{
     width: 600px;
     display: flex;
-
+    height: 100%;
 }
 
 #resultsPage {
