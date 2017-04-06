@@ -204,7 +204,9 @@ $(document).ready(function() {
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
                 dogResultsArray.forEach(function (dog, index, dogs) {
+
                     $("#cards").append("<li class='item'><div class='card sticky-action results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
                 console.log(this);
@@ -214,6 +216,7 @@ $(document).ready(function() {
         });
     });
     //button functions 
+
 
     $(".header").click(function(event){
         event.preventDefault();
@@ -226,6 +229,7 @@ $(document).ready(function() {
    }, 1000);
 
     })
+
     $("#newSearch").click(function(event){
         event.preventDefault();
         $("#search").css("display", "inline");

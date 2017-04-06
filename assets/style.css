@@ -40,12 +40,28 @@ header{
   width: 100%;
 }
 
+#search {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchCard{
+    width: 600px;
+    display: flex;
+
+}
+
 #resultsPage {
   display:none;
+  height: 100vh;
 }
 
 #favoritesPage {
   display:none;
+  height: 100vh;
 
 }
 
@@ -150,11 +166,15 @@ form{
     display: flex;
     flex-direction: column;
 }
+<<<<<<< HEAD
 #searchCard{
     width: 100%;
     display: flex;
     
 }
+=======
+
+>>>>>>> 3fa2b39811214de25f5ff12841fef5686565be79
 div#search.row{
   margin-bottom: 0;
   width: 100%;
