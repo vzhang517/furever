@@ -51,7 +51,7 @@ header{
 #searchCard{
     width: 600px;
     display: flex;
-
+   /* height: 100%;*/
 }
 
 #resultsPage {
@@ -167,8 +167,15 @@ form{
     flex-direction: column;
 }
 
+#searchCard{
+    width: 100%;
+    display: flex;
+    
+}
+
 div#search.row{
   margin-bottom: 0;
+  width: 100%;
 }
 #favorited{
   list-style-type: none;
@@ -232,7 +239,10 @@ button.yes{
   background-color: #9DE0AD !important;
 }
 
-
+#map {
+  height: 250px;
+  width: 100%;
+ }
 
 
 /*animations*/

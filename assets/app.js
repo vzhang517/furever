@@ -49,15 +49,18 @@ $(document).ready(function() {
                 console.log(pets);
 
                 // Constructor for dog objects to collect individual info
-                var Dog = function(name, options, pics, size, age, sex, breeds, address1, address2, city, email, phone, state, zip) {
+
+                var Dog = function(name, options, pics, size, age, breed, sex, address1, address2, city, email, phone, state, zip) {
+
 
                     this.name = name;
                     this.options = options;
                     this.pics = pics;
                     this.size = size;
                     this.age = age;
+                    this.breed = breed;
                     this.sex= sex;
-                    this.breeds = breeds;
+                    this.breed = breed;
                     this.address1 = address1;
                     this.address2 = address2;
                     this.city = city;
@@ -87,14 +90,6 @@ $(document).ready(function() {
                     //console log options
                     console.log("Name of dog: " + currentPet.name.$t);
                     console.log("Size of dog: " + currentPet.size.$t);
-
-                    if(Array.isArray(currentPet.breeds.breed)){
-                        currentPet.breeds.breed.forEach(function(eachBreed){
-                            dogBreed.push(" "+eachBreed.$t);
-                        });
-                    } else {
-                        dogBreed.push(currentPet.breeds.breed.$t);
-                    };
 
                     if (currentPet.media.hasOwnProperty("photos"))  {
                         var thearrayOfDogPhotos = currentPet.media.photos.photo;
@@ -176,8 +171,34 @@ $(document).ready(function() {
                     }else if(optionsArray != undefined){
                         dogOptions.push(optionsArray.$t)
                     }
+
+                    // array to shorten file path
+                    var theArrayToBreed = currentPet.breeds;
+                    // array to get into breed list
+                    var breedsArray = theArrayToBreed.breed;
+
+                    // console variables
+                    console.log(theArrayToBreed);
+                    console.log(breedsArray);
+
+                    // check to see if breeds is an array (hence having more than one option), if so iterate through
+                    
+                        
+                    if(Array.isArray(breedsArray)){
+                    breedsArray.forEach(function(currentOption) {
+                        dogBreed.push(" "+currentOption.$t);
+                        console.log("dog breed: " + currentOption.$t);
+                    });
+                    // if not an array, and also not undefined (empty), just display value found in object
+                    }else if(breedsArray != undefined){
+                        dogBreed.push(breedsArray.$t)
+                        console.log("dog breed: " + breedsArray.$t);
+                    }
+
                     // create a new dog object for every pet and their info using the Dog constructor
-                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogSex, dogBreed, address1, address2, city, email, phone, state, zip);
+
+                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogBreed, dogSex, address1, address2, city, email, phone, state, zip);
+
                     dogResultsArray.push(newDog);
                 });
                 console.log(dogResultsArray);
@@ -186,16 +207,48 @@ $(document).ready(function() {
                 $("#search").css("display", "none");
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
+
                 dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breeds+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+
+
+                    $("#cards").append("<li class='item'><div class='card sticky-action results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p><div id='map'></div></div></div></li>");
+
+
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
+                    initMap();
+                console.log(this);
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
         });
+    function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
     });
     //button functions 
+
+
+    $(".header").click(function(event){
+        event.preventDefault();
+        var linkHref= $(this).attr("href");
+        $("html, body").animate({
+            scrollTop: $(linkHref).offset().top
+        });
+       setTimeout(function(){
+       $("header").css("display", "none");
+   }, 1000);
+
+    })
+
     $("#newSearch").click(function(event){
         event.preventDefault();
         $("#search").css("display", "inline");
@@ -218,7 +271,8 @@ $(document).ready(function() {
         event.preventDefault();
         $("#favoritesPage").css("display", "none");
         $("#resultsPage").css("display", "inline");
-    });     
+    }); 
+
 }); 
 tinderesque();
 
@@ -319,6 +373,7 @@ function tinderesque(){
       //grabbing the child div instead of the li might fix this
       // look into selecting child node?
       $("#favorited").append(origin.querySelector('.current'));
+
     }
     if (ev.animationName === 'nope') {
       origin.classList.remove('nope');
