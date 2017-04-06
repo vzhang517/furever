@@ -50,13 +50,14 @@ $(document).ready(function() {
                 console.log(theArrayOfNope);
 
                 // Constructor for dog objects to collect individual info
-                var Dog = function(name, options, pics, size, age, sex, address1, address2, city, email, phone, state, zip) {
+                var Dog = function(name, options, pics, size, age, breed, sex, address1, address2, city, email, phone, state, zip) {
 
                     this.name = name;
                     this.options = options;
                     this.pics = pics;
                     this.size = size;
                     this.age = age;
+                    this.breed = breed;
                     this.sex= sex;
                     this.address1 = address1;
                     this.address2 = address2;
@@ -74,6 +75,7 @@ $(document).ready(function() {
                     var dogSize = currentPet.size.$t;
                     var dogAge = currentPet.age.$t;
                     var dogSex = currentPet.sex.$t;
+                    var dogBreed = "";
                     // Contact Info
                     var address1;
                     var address2;
@@ -167,8 +169,32 @@ $(document).ready(function() {
                     }else if(optionsArray != undefined){
                         dogOptions.push(optionsArray.$t)
                     }
+
+                    // array to shorten file path
+                    var theArrayToBreed = currentPet.breeds;
+                    // array to get into breed list
+                    var breedsArray = theArrayToBreed.breed;
+
+                    // console variables
+                    console.log(theArrayToBreed);
+                    console.log(breedsArray);
+
+                    // check to see if breeds is an array (hence having more than one option), if so iterate through
+                    
+                        
+                    if(Array.isArray(breedsArray)){
+                    breedsArray.forEach(function(currentOption) {
+                        dogBreed.push(" "+currentOption.$t);
+                        console.log("dog breed: " + currentOption.$t);
+                    });
+                    // if not an array, and also not undefined (empty), just display value found in object
+                    }else if(breedsArray != undefined){
+                        dogBreed.push(breedsArray.$t)
+                        console.log("dog breed: " + breedsArray.$t);
+                    }
+
                     // create a new dog object for every pet and their info using the Dog constructor
-                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogSex, address1, address2, city, email, phone, state, zip);
+                    var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogBreed, dogSex, address1, address2, city, email, phone, state, zip);
                     dogResultsArray.push(newDog);
                 });
                 console.log(dogResultsArray);
@@ -178,9 +204,10 @@ $(document).ready(function() {
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
                 dogResultsArray.forEach(function (dog, index, dogs) {
-                    $("#cards").append("<li class='item'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
+                    $("#cards").append("<li class='item'><div class='card sticky-action results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p></div></div></li>");
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
+                console.log(this);
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
@@ -196,7 +223,7 @@ $(document).ready(function() {
         });
        setTimeout(function(){
        $("header").css("display", "none");
-   }, 700);
+   }, 1000);
 
     })
     $("#newSearch").click(function(event){
@@ -221,7 +248,8 @@ $(document).ready(function() {
         event.preventDefault();
         $("#favoritesPage").css("display", "none");
         $("#resultsPage").css("display", "inline");
-    });     
+    }); 
+
 }); 
 tinderesque();
 
@@ -322,6 +350,7 @@ function tinderesque(){
       //grabbing the child div instead of the li might fix this
       // look into selecting child node?
       $("#favorited").append(origin.querySelector('.current'));
+
     }
     if (ev.animationName === 'nope') {
       origin.classList.remove('nope');
