@@ -75,7 +75,7 @@ $(document).ready(function() {
                     var dogSize = currentPet.size.$t;
                     var dogAge = currentPet.age.$t;
                     var dogSex = currentPet.sex.$t;
-                    var dogBreed = "";
+                    var dogBreed = [];
                     // Contact Info
                     var address1;
                     var address2;
