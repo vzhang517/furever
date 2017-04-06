@@ -162,9 +162,18 @@ form{
     display: flex;
     flex-direction: column;
 }
+<<<<<<< HEAD
+#searchCard{
+    width: 100%;
+    display: flex;
+    
+}
+=======
 
+>>>>>>> 3fa2b39811214de25f5ff12841fef5686565be79
 div#search.row{
   margin-bottom: 0;
+  width: 100%;
 }
 #favorited{
   list-style-type: none;
