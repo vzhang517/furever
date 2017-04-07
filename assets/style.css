@@ -289,3 +289,9 @@ button.yes{
     -webkit-transform: rotate(-40deg) translateY(-80px);
     opacity: 0;
   }
+
+
+  #map-canvas {
+        height: 400px;
+        width: 100%;
+       }

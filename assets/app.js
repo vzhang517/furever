@@ -1,3 +1,16 @@
+//  var config = {
+//   apiKey: "AIzaSyDqYaGboo_8FORYN-_hq2YTsbyHMCdE_a8",
+//  authDomain: "furever-d5b02.firebaseapp.com",
+//  databaseURL: "https://furever-d5b02.firebaseio.com",
+//   projectId: "furever-d5b02",
+// storageBucket: "employee-log-project.appspot.com",
+// messagingSenderId: "595982056233"
+//   };
+// firebase.initializeApp(config);
+
+// var database= firebase.database();
+
+
 // only holds zip code for now
 var favoritesArr = [];
 tinderesque();
@@ -273,6 +286,17 @@ $(document).ready(function() {
         $("#favoritesPage").css("display", "inline");
         $("#resultsPage").css("display", "none");
         $(".favorited").css("display","inline");
+
+        for (var i=0; i<favoritesArr.length; i++) {
+
+            initialize();
+            codeAddress(favoritesArr[i]);
+      
+
+        }
+
+      
+
     });
 
     $("#results").click(function(event){
@@ -311,6 +335,43 @@ $(document.body).on('click', '.rotateButton', function() {
 
     }
 });
+
+
+
+  var geocoder;
+  var mapCluster;
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    mapCluster = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  } 
+
+  function codeAddress(x) {
+    var address = x;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        mapCluster.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+
+
+            map: mapCluster,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    console.log(results); });
+  }
+
+
+
+
 
 function tinderesque(){
   var animating = false;
