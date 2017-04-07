@@ -416,5 +416,4 @@ function tinderesque(){
   window.addEventListener('DOMContentLoaded', function(){
     document.body.classList.add('tinderesque');
   });
-  initMap();
 };
