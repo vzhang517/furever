@@ -1,3 +1,6 @@
+// only holds zip code for now
+var favoritesArr = [];
+tinderesque();
 $(document).ready(function() {
     $('select').material_select();
     $('.tooltipped').tooltip({
@@ -7,6 +10,7 @@ $(document).ready(function() {
 
     $("#submit").click(function(event) {
         event.preventDefault();
+        
         //clear results before every search
         $("#cards").html(" ");
         //grabbing user input from form 
@@ -19,6 +23,7 @@ $(document).ready(function() {
         var queryURL = "http://api.petfinder.com/pet.find?";
 
         var dogResultsArray = [];
+        
 
         if (zipcode === "") {
             Materialize.toast('Location is required!', 3000);
@@ -208,35 +213,38 @@ $(document).ready(function() {
                 $("#resultsPage").css("display", "inline"); 
                 //create a card for each dog 
 
-                dogResultsArray.forEach(function (dog, index, dogs) {
+                dogResultsArray.forEach(function (dog, index) {
 
-
-                    $("#cards").append("<li class='item'><div class='card sticky-action results'><div class='card-image'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p><div id='map'></div></div></div></li>");
-
+                    // added attribute zip to try to grab zip code of current dog
+                    $("#cards").append("<li class='item' zip='"+dog.zip+"'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                        initMap();
+                        // here we can change var uluru to specific zip code for each dog??
+                        function initMap() {
+                            var uluru = {lat: -25.363, lng: 131.044};
+                            var map = new google.maps.Map(document.getElementById('map'+index), {
+                              zoom: 4,
+                              center: uluru
+                            });
+                            var marker = new google.maps.Marker({
+                              position: uluru,
+                              map: map
+                            });
+                            
+      };
 
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
-                    initMap();
-                console.log(this);
+                // console.log($('li.item.current').attr("zip"));
+                    
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
         });
-    function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
+
     });
+
+    
     //button functions 
-
-
     $(".header").click(function(event){
         event.preventDefault();
         var linkHref= $(this).attr("href");
@@ -274,7 +282,8 @@ $(document).ready(function() {
     }); 
 
 }); 
-tinderesque();
+
+
 
 
 /////working with dynamically generated content so need to call function below///////// 
@@ -308,6 +317,7 @@ function tinderesque(){
 
   function animatecard(ev) {
     if (animating === false) {
+
       //element that triggered the event 
       var button = ev.target;
       if (button.className === 'no') {
@@ -325,6 +335,8 @@ function tinderesque(){
         );
       }
       if (button.className === 'yes') {
+        console.log($('li.item.current').attr("zip"))
+        favoritesArr.push($('li.item.current').attr("zip"));
         button.parentNode.classList.add('yes');
         animating = true;
         fireCustomEvent('yepcard',
@@ -370,9 +382,9 @@ function tinderesque(){
     if (ev.animationName === 'yay') {
       origin.classList.remove('yes');
 
-      //grabbing the child div instead of the li might fix this
-      // look into selecting child node?
       $("#favorited").append(origin.querySelector('.current'));
+
+      
 
     }
     if (ev.animationName === 'nope') {
