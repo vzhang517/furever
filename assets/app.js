@@ -1,5 +1,6 @@
 // only holds zip code for now
 var favoritesArr = [];
+var testFavouritesArr =[];
 tinderesque();
 $(document).ready(function() {
     $('select').material_select();
@@ -218,6 +219,7 @@ $(document).ready(function() {
                     // added attribute zip to try to grab zip code of current dog
                     $("#cards").append("<li class='item' zip='"+dog.zip+"'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         initMap();
+                        console.log(dog);
                         // here we can change var uluru to specific zip code for each dog??
                         function initMap() {
                             var uluru = {lat: -25.363, lng: 131.044};
@@ -335,7 +337,9 @@ function tinderesque(){
         );
       }
       if (button.className === 'yes') {
-        console.log($('li.item.current').attr("zip"))
+        console.log($('li.item.current').attr("zip"));
+        console.log($(this.dog));
+
         favoritesArr.push($('li.item.current').attr("zip"));
         button.parentNode.classList.add('yes');
         animating = true;
