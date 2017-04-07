@@ -73,6 +73,7 @@ $(document).ready(function() {
                     this.phone = phone;
                     this.state = state;
                     this.zip = zip;
+                
                 };
 
                 pets.forEach(function(currentPet) {
@@ -91,6 +92,7 @@ $(document).ready(function() {
                     var phone;
                     var state;
                     var zip;
+               
 
                     //console log options
                     console.log("Name of dog: " + currentPet.name.$t);
@@ -110,6 +112,7 @@ $(document).ready(function() {
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////    
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
+
 
                     if (currentPet.contact.address1.hasOwnProperty('$t')) {
                         address1 = currentPet.contact.address1.$t;
@@ -156,6 +159,7 @@ $(document).ready(function() {
                     console.log("zip: " + zip);
 
 
+                    
                     var theNextArrayOfNope = currentPet.options;
                     
                     var optionsArray = (theNextArrayOfNope.option);
@@ -283,15 +287,11 @@ $(document).ready(function() {
 
 }); 
 
-
-
-
 /////working with dynamically generated content so need to call function below///////// 
 $(document.body).on('click', '.rotateButton', function() {
     console.log('clicked');
 
     //searches siblings (after click of rotateButton) of <a> element for attribute of "data-deg" and continues with function if set to "0" -- then rotates pic 90 degrees//
-
     if ($(this).siblings().attr("data-deg") === "0") {
         $(this).siblings().rotate(90);
         $(this).siblings().attr("data-deg", "90");
@@ -383,9 +383,6 @@ function tinderesque(){
       origin.classList.remove('yes');
 
       $("#favorited").append(origin.querySelector('.current'));
-
-      
-
     }
     if (ev.animationName === 'nope') {
       origin.classList.remove('nope');
