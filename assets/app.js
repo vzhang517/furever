@@ -219,6 +219,7 @@ $(document).ready(function() {
                     $("#cards").append("<li class='item' zip='"+dog.zip+"'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         initMap();
                         // here we can change var uluru to specific zip code for each dog??
+                      
                         function initMap() {
                             var uluru = {lat: -25.363, lng: 131.044};
                             var map = new google.maps.Map(document.getElementById('map'+index), {
@@ -273,6 +274,17 @@ $(document).ready(function() {
         $("#favoritesPage").css("display", "inline");
         $("#resultsPage").css("display", "none");
         $(".favorited").css("display","inline");
+
+        for (var i=0; i<favoritesArr.length; i++) {
+
+            initialize();
+            codeAddress(favoritesArr[i]);
+      
+
+        }
+
+      
+
     });
 
     $("#results").click(function(event){
@@ -311,6 +323,43 @@ $(document.body).on('click', '.rotateButton', function() {
 
     }
 });
+
+
+
+  var geocoder;
+  var mapCluster;
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    mapCluster = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  } 
+
+  function codeAddress(x) {
+    var address = x;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        mapCluster.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+
+
+            map: mapCluster,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    console.log(results); });
+  }
+
+
+
+
 
 function tinderesque(){
   var animating = false;
