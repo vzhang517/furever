@@ -1,3 +1,16 @@
+//  var config = {
+//   apiKey: "AIzaSyDqYaGboo_8FORYN-_hq2YTsbyHMCdE_a8",
+//  authDomain: "furever-d5b02.firebaseapp.com",
+//  databaseURL: "https://furever-d5b02.firebaseio.com",
+//   projectId: "furever-d5b02",
+// storageBucket: "employee-log-project.appspot.com",
+// messagingSenderId: "595982056233"
+//   };
+// firebase.initializeApp(config);
+
+// var database= firebase.database();
+
+
 // only holds zip code for now
 var favoritesArr = [];
 tinderesque();
@@ -221,20 +234,37 @@ $(document).ready(function() {
 
                     // added attribute zip to try to grab zip code of current dog
                     $("#cards").append("<li class='item' zip='"+dog.zip+"'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                        //calling geocoding and map function
                         initMap();
-                        // here we can change var uluru to specific zip code for each dog??
+                   
+                        var geoCoder;
+                        var map;
                         function initMap() {
-                            var uluru = {lat: -25.363, lng: 131.044};
+                            // creating new geocoder object
+                            geocoder = new google.maps.Geocoder();
+                            // var point = new google.maps.LatLng(-34.397, 150.644);
+                            // creating new map in map div 
                             var map = new google.maps.Map(document.getElementById('map'+index), {
-                              zoom: 4,
-                              center: uluru
+                              zoom: 8,
+                              // center: point,
+                            }); 
+                            //geocode function passing parameter dog.zip as value for address key
+                            geocoder.geocode({'address':dog.zip},function(results,status){
+                                    // if results are found set the center of the map to our new location
+                                    if(status == google.maps.GeocoderStatus.OK){
+                                        map.setCenter(results[0].geometry.location);
+                                        //create a marker at this location too
+                                        var marker = new google.maps.Marker({
+                                            map:map, 
+                                            position: results[0].geometry.location
+                                        });
+                                    } else {
+                                        alert("problem: "+status);
+                                    }
                             });
-                            var marker = new google.maps.Marker({
-                              position: uluru,
-                              map: map
-                            });
-                            
-      };
+
+                        };
+               
 
                     //add class 'current' to first li of div id cards
                 }); $('#cards li:first').addClass('current');
@@ -277,6 +307,17 @@ $(document).ready(function() {
         $("#favoritesPage").css("display", "inline");
         $("#resultsPage").css("display", "none");
         $(".favorited").css("display","inline");
+
+        for (var i=0; i<favoritesArr.length; i++) {
+
+            initialize();
+            codeAddress(favoritesArr[i]);
+      
+
+        }
+
+      
+
     });
 
     $("#results").click(function(event){
@@ -311,6 +352,43 @@ $(document.body).on('click', '.rotateButton', function() {
 
     }
 });
+
+
+
+  var geocoder;
+  var mapCluster;
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    mapCluster = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  } 
+
+  function codeAddress(x) {
+    var address = x;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        mapCluster.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+
+
+            map: mapCluster,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    console.log(results); });
+  }
+
+
+
+
 
 function tinderesque(){
   var animating = false;
