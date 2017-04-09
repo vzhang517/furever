@@ -87,7 +87,8 @@ header{
   width: 50%;
   margin-top: 10px;
   display: flex;
-    align-items: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .card .card-content {

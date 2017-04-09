@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('.tooltipped').tooltip({
         delay: 50
     });
-    $('.materialboxed').materialbox();
+    
 
     $("#submit").click(function(event) {
         event.preventDefault();
@@ -218,9 +218,10 @@ $(document).ready(function() {
                 //create a card for each dog 
 
                 dogResultsArray.forEach(function (dog, index) {
+                    $('.materialboxed').materialbox();
 
                     // added attribute zip to try to grab zip code of current dog
-                    $("#cards").append("<li class='item' zip="+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                    $("#cards").append("<li class='item' zip="+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         //calling geocoding and map function
                         
                         initMap();
@@ -331,27 +332,34 @@ $(document).ready(function() {
 /////working with dynamically generated content so need to call function below///////// 
 $(document.body).on('click', '.rotateButton', function() {
     console.log('clicked');
+    if(!$(this).siblings(".material-placeholder").find("img").hasClass("active")) {
+        $(this).parent().css("overflow", "hidden");
+                    }
+                    
 
     //searches siblings (after click of rotateButton) of <a> element for attribute of "data-deg" and continues with function if set to "0" -- then rotates pic 90 degrees//
-    if ($(this).siblings().attr("data-deg") === "0") {
-        $(this).siblings().rotate(90);
-        $(this).siblings().attr("data-deg", "90");
+    if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "0") {
+        $(this).siblings(".material-placeholder").find("img").rotate(90);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "90");
         console.log(this);
         
-    } else if ($(this).siblings().attr("data-deg") === "90") {
-        $(this).siblings().rotate(180);
-        $(this).siblings().attr("data-deg", "180");
+    } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "90") {
+        $(this).siblings(".material-placeholder").find("img").rotate(180);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "180");
 
-    } else if ($(this).siblings().attr("data-deg") === "180") {
-        $(this).siblings().rotate(270);
-        $(this).siblings().attr("data-deg", "270");
+    } else if($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "180") {
+        $(this).siblings(".material-placeholder").find("img").rotate(270);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "270");
 
-    } else if ($(this).siblings().attr("data-deg") === "270") {
-        $(this).siblings().rotate(0);
-        $(this).siblings().attr("data-deg", "0");
+    } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "270") {
+        $(this).siblings(".material-placeholder").find("img").rotate(0);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "0");
 
     }
+
 });
+
+
 
 
 
