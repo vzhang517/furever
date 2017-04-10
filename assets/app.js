@@ -242,7 +242,7 @@ $(document).ready(function() {
                             // var point = new google.maps.LatLng(-34.397, 150.644);
                             // creating new map in map div 
                             var map = new google.maps.Map(document.getElementById('map'+index), {
-                              zoom: 8,
+                              zoom: 9,
                               // center: point,
                             }); 
                             //geocode function passing parameter dog.zip as value for address key
@@ -308,6 +308,7 @@ $(document).ready(function() {
         $("#resultsPage").css("display", "none");
         $(".favorited").css("display","inline");
 
+        //for loop to loop through address of favoritesArray
         for (var i=0; i<favoritesArr.length; i++) {
 
             initialize();
@@ -358,17 +359,19 @@ $(document.body).on('click', '.rotateButton', function() {
   var geocoder;
   var mapCluster;
 
+  //initialized cluster map
   function initialize() {
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(-34.397, 150.644);
     var mapOptions = {
-      zoom: 8,
+      zoom: 9,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     mapCluster = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   } 
 
+//changes addresses to coordinates for google maps to read
   function codeAddress(x) {
     var address = x;
     geocoder.geocode( { 'address': address}, function(results, status) {
