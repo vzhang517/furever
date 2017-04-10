@@ -276,14 +276,17 @@ $(document).ready(function() {
         $("#resultsPage").css("display", "none");
         $("#reset").click();
         $("#favorited").html("");
+        deleteMarkers();
 
+   
     });
     $("#newSearch2").click(function(event){
         $("#favoritesPage").css("display", "none");
         $("#search").css("display", "inline");
         $("#reset").click();
-        $("#favorited").html("");
-
+        $("#favorited").html("");       
+        deleteMarkers();
+       
     });
     $("#favorites").click(function(event){
         event.preventDefault();
@@ -291,10 +294,7 @@ $(document).ready(function() {
         $("#resultsPage").css("display", "none");
         $(".favorited").css("display","inline");
         // favorites page map
-        for (var i=0; i<favoritesArr.length; i++) {
-            initialize();
-            codeAddress(favoritesArr[i]);
-        }
+        setMarkers();
     });
 
     $("#results").click(function(event){
@@ -338,7 +338,7 @@ $(document.body).on('click', '.rotateButton', function() {
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(-34.397, 150.644);
     var mapOptions = {
-      zoom: 8,
+      zoom: 10,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
@@ -347,13 +347,11 @@ $(document.body).on('click', '.rotateButton', function() {
 
   function codeAddress(x) {
     var address = x;
-    geocoder.geocode( { 'address': address}, function(results, status) {
+    geocoder.geocode( {'address': address}, function(results, status) {
         console.log("I'm initializing!");
       if (status == google.maps.GeocoderStatus.OK) {
         mapCluster.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
-
-
             map: mapCluster,
             position: results[0].geometry.location
         });
@@ -362,7 +360,17 @@ $(document.body).on('click', '.rotateButton', function() {
       }
     console.log(results); });
   };
+  function setMarkers(){
+    for (var i=0; i<favoritesArr.length; i++) {
+    initialize();
+    codeAddress(favoritesArr[i]);
+    }
+  };
 
+  function deleteMarkers(){
+    setMarkers(null);
+    favoritesArr=[];
+  };
 function tinderesque(){
   var animating = false;
 
