@@ -4043,6 +4043,8 @@ if (jQuery) {
   $(document).ready(function() {
 
     $(document).on('click.card', '.card', function (e) {
+    	window.dispatchEvent(new Event('resize'));
+    	console.log("testing")
       if ($(this).find('> .card-reveal').length) {
         if ($(e.target).is($('.card-reveal .card-title')) || $(e.target).is($('.card-reveal .card-title i'))) {
           // Make Reveal animate down and display none
