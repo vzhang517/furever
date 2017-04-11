@@ -18,7 +18,7 @@ $(document).ready(function() {
         var gender = $("#gender").val();
         var zipcode = $("#location").val();
         var api_key = '96d7e760e6cf087c0470a585636831ff';
-        var queryURL = "http://api.petfinder.com/pet.find?";
+        var queryURL = "https://api.petfinder.com/pet.find?";
 
         var dogResultsArray = [];
         // alert for required zipcode
