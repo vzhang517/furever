@@ -6,11 +6,9 @@ $(document).ready(function() {
     $('.tooltipped').tooltip({
         delay: 50
     });
-    $('.materialboxed').materialbox();
-
+    
     $("#submit").click(function(event) {
         event.preventDefault();
-        
         //clear results before every search
         $("#cards").html(" ");
         //grabbing user input from form 
@@ -20,15 +18,14 @@ $(document).ready(function() {
         var gender = $("#gender").val();
         var zipcode = $("#location").val();
         var api_key = '96d7e760e6cf087c0470a585636831ff';
-        var queryURL = "http://api.petfinder.com/pet.find?";
+        var queryURL = "https://api.petfinder.com/pet.find?";
 
         var dogResultsArray = [];
-        
-
+        // alert for required zipcode
         if (zipcode === "") {
             Materialize.toast('Location is required!', 3000);
         }
-
+        // building query url
         queryURL += $.param({
             'breed': breed,
             'format': 'json',
@@ -48,13 +45,13 @@ $(document).ready(function() {
             crossDomain: true,
             dataType: "jsonp"
         }).done(function(response) {
+            // if there is a response
             if (response.petfinder.pets) {  
                 console.log(queryURL);
                 var pets = response.petfinder.pets.pet;
                 console.log(pets);
 
                 // Constructor for dog objects to collect individual info
-
                 var Dog = function(name, options, pics, size, age, breed, sex, address1, address2, city, email, phone, state, zip) {
 
 
@@ -112,8 +109,6 @@ $(document).ready(function() {
                     console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////    
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
-
-
                     if (currentPet.contact.address1.hasOwnProperty('$t')) {
                         address1 = currentPet.contact.address1.$t;
                     } else
@@ -158,8 +153,6 @@ $(document).ready(function() {
                     console.log("state: " + state);
                     console.log("zip: " + zip);
 
-
-                    
                     var theNextArrayOfNope = currentPet.options;
                     
                     var optionsArray = (theNextArrayOfNope.option);
@@ -168,9 +161,7 @@ $(document).ready(function() {
                     console.log(theNextArrayOfNope);
                     console.log(optionsArray);
 
-                    // check to see if options is an array (hence having more than one option), if so iterate through
-                    // if(theNextArrayOfNope.hasOwnProperty("options")){
-                        
+                    // check to see if options is an array (hence having more than one option), if so iterate through     
                     if(Array.isArray(optionsArray)){
                     optionsArray.forEach(function(currentOption) {
                         dogOptions.push(" "+currentOption.$t);
@@ -190,9 +181,7 @@ $(document).ready(function() {
                     console.log(theArrayToBreed);
                     console.log(breedsArray);
 
-                    // check to see if breeds is an array (hence having more than one option), if so iterate through
-                    
-                        
+                    // check to see if breeds is an array (hence having more than one option), if so iterate through   
                     if(Array.isArray(breedsArray)){
                     breedsArray.forEach(function(currentOption) {
                         dogBreed.push(" "+currentOption.$t);
@@ -205,7 +194,6 @@ $(document).ready(function() {
                     }
 
                     // create a new dog object for every pet and their info using the Dog constructor
-
                     var newDog = new Dog(dogName, dogOptions, dogPicArray, dogSize, dogAge, dogBreed, dogSex, address1, address2, city, email, phone, state, zip);
 
                     dogResultsArray.push(newDog);
@@ -218,32 +206,30 @@ $(document).ready(function() {
                 //create a card for each dog 
 
                 dogResultsArray.forEach(function (dog, index) {
+                    $('.materialboxed').materialbox();
 
                     // added attribute zip to try to grab zip code of current dog
-                    $("#cards").append("<li class='item' zip="+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image waves-effect waves-block waves-light'><img data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating waves-effect'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         //calling geocoding and map function
-                        
                         initMap();
 
                         function initMap() {
-                            // creating new geocoder object
-
                             var address; 
-
-                            if(dog.address1==="Address not provided." || dog.address1.indexOf("PO") != -1){
+                            // if no address or address is a po box, use zip 
+                            if(dog.address1==="Address not provided." || dog.address1.indexOf("PO") != -1 || dog.address1.indexOf("P.O.") != -1){
                                 address= dog.zip;
 
                             }else{
                                 address = dog.zip + " " + dog.address1;
                             }
                             
-                            console.log(address);
                             geocoder = new google.maps.Geocoder();
-                            // var point = new google.maps.LatLng(-34.397, 150.644);
+                            var point = new google.maps.LatLng(-34.397, 150.644);
                             // creating new map in map div 
                             var map = new google.maps.Map(document.getElementById('map'+index), {
-                              zoom: 9,
-                              // center: point,
+
+                              zoom: 15,
+                              center: point,
                             }); 
                             //geocode function passing parameter dog.zip as value for address key
                             geocoder.geocode({'address': address},function(results,status){
@@ -261,15 +247,9 @@ $(document).ready(function() {
                                         alert("problem: "+status);
                                     }
                             });
-                            console.log("I'm initializing in the cards!")
-                            console.log()
                         };
-               
-
                     //add class 'current' to first li of div id cards
-                }); $('#cards li:first').addClass('current');
-                // console.log($('li.item.current').attr("zip"));
-                    
+                }); $('#cards li:first').addClass('current');    
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
@@ -287,26 +267,34 @@ $(document).ready(function() {
         });
        setTimeout(function(){
        $("header").css("display", "none");
-   }, 1000);
+        }, 1000);
 
-    })
+    });
 
     $("#newSearch").click(function(event){
         event.preventDefault();
         $("#search").css("display", "inline");
         $("#resultsPage").css("display", "none");
         $("#reset").click();
+        $("#favorited").html("");
+        deleteMarkers();
+
+   
     });
     $("#newSearch2").click(function(event){
         $("#favoritesPage").css("display", "none");
         $("#search").css("display", "inline");
         $("#reset").click();
+        $("#favorited").html("");       
+        deleteMarkers();
+       
     });
     $("#favorites").click(function(event){
         event.preventDefault();
         $("#favoritesPage").css("display", "inline");
         $("#resultsPage").css("display", "none");
         $(".favorited").css("display","inline");
+
 
         //for loop to loop through address of favoritesArray
         for (var i=0; i<favoritesArr.length; i++) {
@@ -318,6 +306,10 @@ $(document).ready(function() {
         }
 
       
+
+
+        // favorites page map
+        setMarkers();
 
     });
 
@@ -332,29 +324,28 @@ $(document).ready(function() {
 /////working with dynamically generated content so need to call function below///////// 
 $(document.body).on('click', '.rotateButton', function() {
     console.log('clicked');
-
+    if(!$(this).siblings(".material-placeholder").find("img").hasClass("active")) {
+        $(this).parent().css("overflow", "hidden");
+                    }
     //searches siblings (after click of rotateButton) of <a> element for attribute of "data-deg" and continues with function if set to "0" -- then rotates pic 90 degrees//
-    if ($(this).siblings().attr("data-deg") === "0") {
-        $(this).siblings().rotate(90);
-        $(this).siblings().attr("data-deg", "90");
+    if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "0") {
+        $(this).siblings(".material-placeholder").find("img").rotate(90);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "90");
         console.log(this);
         
-    } else if ($(this).siblings().attr("data-deg") === "90") {
-        $(this).siblings().rotate(180);
-        $(this).siblings().attr("data-deg", "180");
+    } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "90") {
+        $(this).siblings(".material-placeholder").find("img").rotate(180);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "180");
 
-    } else if ($(this).siblings().attr("data-deg") === "180") {
-        $(this).siblings().rotate(270);
-        $(this).siblings().attr("data-deg", "270");
+    } else if($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "180") {
+        $(this).siblings(".material-placeholder").find("img").rotate(270);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "270");
 
-    } else if ($(this).siblings().attr("data-deg") === "270") {
-        $(this).siblings().rotate(0);
-        $(this).siblings().attr("data-deg", "0");
-
+    } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "270") {
+        $(this).siblings(".material-placeholder").find("img").rotate(0);
+        $(this).siblings(".material-placeholder").find("img").attr("data-deg", "0");
     }
 });
-
-
 
   var geocoder;
   var mapCluster;
@@ -364,23 +355,22 @@ $(document.body).on('click', '.rotateButton', function() {
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(-34.397, 150.644);
     var mapOptions = {
-      zoom: 9,
+
+      zoom: 10,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     mapCluster = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  } 
+  }; 
 
 //changes addresses to coordinates for google maps to read
   function codeAddress(x) {
     var address = x;
-    geocoder.geocode( { 'address': address}, function(results, status) {
+    geocoder.geocode( {'address': address}, function(results, status) {
         console.log("I'm initializing!");
       if (status == google.maps.GeocoderStatus.OK) {
         mapCluster.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
-
-
             map: mapCluster,
             position: results[0].geometry.location
         });
@@ -388,12 +378,18 @@ $(document.body).on('click', '.rotateButton', function() {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     console.log(results); });
-  }
+  };
+  function setMarkers(){
+    for (var i=0; i<favoritesArr.length; i++) {
+    initialize();
+    codeAddress(favoritesArr[i]);
+    }
+  };
 
-
-
-
-
+  function deleteMarkers(){
+    setMarkers(null);
+    favoritesArr=[];
+  };
 function tinderesque(){
   var animating = false;
 
@@ -420,7 +416,7 @@ function tinderesque(){
         console.log($('li.item.current').attr("zip"));
         console.log($('li.item.current').attr("address"));
 
-        if($('li.item.current').attr("address")==="Address not provided." || $('li.item.current').attr("address").indexOf("PO") != -1){
+        if($('li.item.current').attr("address")==="Address not provided." || $('li.item.current').attr("address").indexOf("PO") != -1 || $('li.item.current').attr("address").indexOf("P.O.") != -1){
             favoritesArr.push($('li.item.current').attr("zip"));
 
         }else{
@@ -491,6 +487,10 @@ function tinderesque(){
           });
           $("#resultsPage").css("display", "none");
           $("#favoritesPage").css("display", "inline"); 
+          for (var i=0; i<favoritesArr.length; i++) {
+            initialize();
+            codeAddress(favoritesArr[i]);
+          }          
         } else {
           //else add current to the next li 
           origin.querySelector('.item').classList.add('current');
