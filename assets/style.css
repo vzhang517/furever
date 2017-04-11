@@ -254,6 +254,11 @@ footer{
   bottom:0 ;
   
 }
+/*.card-reveal{
+  display: block !important;
+  /*visibility: visible !important;
+
+}*/
 
 
 /*animations*/

@@ -209,9 +209,12 @@ $(document).ready(function() {
                     $('.materialboxed').materialbox();
 
                     // added attribute zip to try to grab zip code of current dog
-                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal' style='visibility: visible; display: block' ><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         //calling geocoding and map function
-                        initMap();
+
+                        // initMap();
+                        // setTimeout($(document.card).css({vibility: 'hidden !important'}), 500);
+
 
                         function initMap() {
                             var address; 
@@ -227,9 +230,11 @@ $(document).ready(function() {
                             var point = new google.maps.LatLng(-34.397, 150.644);
                             // creating new map in map div 
                             var map = new google.maps.Map(document.getElementById('map'+index), {
-                              zoom: 15,
+                              zoom: 10,
                               center: point,
+
                             }); 
+                            
                             //geocode function passing parameter dog.zip as value for address key
                             geocoder.geocode({'address': address},function(results,status){
                                
@@ -240,15 +245,19 @@ $(document).ready(function() {
                                         var marker = new google.maps.Marker({
                                             map:map, 
                                             position: results[0].geometry.location
+                                           
                                         });
 
                                     } else {
                                         alert("problem: "+status);
                                     }
                             });
+                         
                         };
                     //add class 'current' to first li of div id cards
-                }); $('#cards li:first').addClass('current');    
+                }); $('#cards li:first').addClass('current');
+                 
+                
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
@@ -256,8 +265,44 @@ $(document).ready(function() {
 
     });
 
+$(document).on('click.card', '.card', function (e) {
+      if ($(this).find('> .card-reveal').length) {
+        if ($(e.target).is($('.card-reveal .card-title')) || $(e.target).is($('.card-reveal .card-title i'))) {
+          // Make Reveal animate down and display none
+          $(this).find('.card-reveal').velocity(
+            {translateY: 0}, {
+              duration: 225,
+              queue: false,
+              easing: 'easeInOutQuad',
+              complete: function() { $(this).css({ vibility: 'hidden'}); }
+            }
+          );
+        }
+        else if ($(e.target).is($('.card .activator')) ||
+                 $(e.target).is($('.card .activator i')) ) {
+          $(e.target).closest('.card').css('overflow', 'hidden');
+          $(this).find('.card-reveal').css({ vibility: 'visible'}).velocity("stop", false).velocity({translateY: '-100%'}, {duration: 300, queue: false, easing: 'easeInOutQuad'});
+        }
+      }
+
+      $('.card-reveal').closest('.card').css('overflow', 'hidden');
+
+    });
+
     
     //button functions 
+    $(".container").click(function(){
+        // event.preventDefault();
+        console.log("I'm being clicked!");
+        // $(".card-reveal").addClass("hidden");
+        // $((".card-reveal").removeClass("hidden").addClass("show");
+
+
+        // $(".card-reveal").css("display", "block !important");
+
+
+    });
+
     $(".header").click(function(event){
         event.preventDefault();
         var linkHref= $(this).attr("href");
@@ -269,6 +314,7 @@ $(document).ready(function() {
         }, 1000);
 
     });
+   
 
     $("#newSearch").click(function(event){
         event.preventDefault();
@@ -372,6 +418,7 @@ $(document.body).on('click', '.rotateButton', function() {
     favoritesArr=[];
   };
 function tinderesque(){
+
   var animating = false;
 
   function animatecard(ev) {
