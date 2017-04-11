@@ -213,6 +213,8 @@ $(document).ready(function() {
                         //calling geocoding and map function
                         initMap();
 
+
+
                         function initMap() {
                             var address; 
                             // if no address or address is a po box, use zip 
@@ -248,6 +250,7 @@ $(document).ready(function() {
                             });
                         };
                     //add class 'current' to first li of div id cards
+
                 }); $('#cards li:first').addClass('current');    
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
@@ -256,7 +259,13 @@ $(document).ready(function() {
 
     });
 
-    
+    $(".card-content").click(function(event){
+        $( ".tabs" ).tabs({
+    activate: function( event, ui ) {if(ui.newPanel.has('#map-canvas')){
+        google.maps.event.trigger(window,'resize',{});};}
+});
+        console.log("hello");
+    })
     //button functions 
     $(".header").click(function(event){
         event.preventDefault();
@@ -475,6 +484,7 @@ function tinderesque(){
         } else {
           //else add current to the next li 
           origin.querySelector('.item').classList.add('current');
+
         }
       }
     }
