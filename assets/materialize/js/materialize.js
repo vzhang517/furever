@@ -4051,14 +4051,14 @@ if (jQuery) {
               duration: 225,
               queue: false,
               easing: 'easeInOutQuad',
-              complete: function() { $(this).css({ display: 'none'}); }
+              complete: function() { $(this).css({ visibility: 'hidden'}); }
             }
           );
         }
         else if ($(e.target).is($('.card .activator')) ||
                  $(e.target).is($('.card .activator i')) ) {
           $(e.target).closest('.card').css('overflow', 'hidden');
-          $(this).find('.card-reveal').css({ display: 'block'}).velocity("stop", false).velocity({translateY: '-100%'}, {duration: 300, queue: false, easing: 'easeInOutQuad'});
+          $(this).find('.card-reveal').css({ visibility: 'visible'}).velocity("stop", false).velocity({translateY: '-100%'}, {duration: 300, queue: false, easing: 'easeInOutQuad'});
         }
       }
     });

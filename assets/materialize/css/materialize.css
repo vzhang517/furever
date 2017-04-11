@@ -1,4 +1,4 @@
-/*!
+div
  * Materialize v0.98.1 (http://materializecss.com)
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
@@ -4797,7 +4797,8 @@ small {
   top: 100%;
   height: 100%;
   z-index: 3;
-  display: none;
+  visibility: hidden;
+  /*display: none;*/
 }
 
 .card .card-reveal .card-title {
