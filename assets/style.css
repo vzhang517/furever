@@ -23,6 +23,7 @@ body{
   height: 100%;
   padding: 0;
   color: #594F4F !important;
+  font-family: 'Montserrat', sans-serif;
 }
 html{
   background-color:rgba(47, 54, 64, 0.85);
@@ -53,6 +54,7 @@ header img{
 .input-field.col label{
   font-size: x-large;
 
+
 }
 
 .fa-lg{
@@ -60,6 +62,7 @@ header img{
 }
 .input-field label:not(.label-icon).active{
   font-size: x-large;
+
 }
 .container{
   max-width: 970px;
@@ -76,6 +79,7 @@ header img{
 }
 .input-field input[type=text]{
   font-size: large;
+  padding-top:10px;
 }
 #search {
   height: 100vh;
@@ -227,14 +231,13 @@ form{
 }
 
 #searchCard{
-    width: 100%;
-    display: flex;
-    border-radius: 20px;
-    box-shadow: 0 0 25px #888888;
+  width: 100%;
+  display: flex;
+  box-shadow: 10px 10px 25px rgb(29, 28, 26);
     
 }
-.card{
-  box-shadow: 0 0 25px #888888;
+.results{
+  box-shadow: 10px 10px 25px rgb(29, 28, 26);
 }
 div#search.row{
   margin-bottom: 0;
