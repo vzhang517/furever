@@ -10,7 +10,7 @@ DARK GREY#594F4F,
 body, html{
   margin: 0;
   padding: 0;
-  background-color: rgba(232, 221, 203, 0.35);
+  background-color:rgba(47, 54, 64, 0.85);
   color: #594F4F !important;
 }
 header{
@@ -56,7 +56,7 @@ header{
 
 #resultsPage {
   display:none;
-  height: 100vh;
+  height: 100%;
 }
 
 #favoritesPage {
