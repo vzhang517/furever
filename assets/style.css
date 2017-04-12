@@ -6,13 +6,30 @@ DARK BLUE #547980,
 TAUPE   #E8DDCB,
 DARK GREY#594F4F,
 */
+@font-face {
+    font-family: 'wendy_lpbold';
+    src: url('wendy_lp_bold-webfont.woff2') format('woff2'),
+         url('wendy_lp_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
-body, html{
+}
+
+*{
+  box-sizing: border-box;
+}
+body{
   margin: 0;
+  height: 100%;
   padding: 0;
-  background-color:rgba(47, 54, 64, 0.85);
+ 
+  background-size: cover;
   color: #594F4F !important;
 }
+html{
+  background-color:rgba(47, 54, 64, 0.85);
+}
+
 header{
 
   background-image: url("images/weimaraner-puppy-dog-snout-97082.jpeg");
@@ -22,14 +39,20 @@ header{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
   color: #dcd5d2;
-  text-shadow: 0px 0px 300px #000;
+  text-shadow: 1px 0px 10px #000;
   background-color: transparent;
+}
+header img{
+  width: 400px;
 }
 
 
 .container{
+  max-width: 970px;
+  margin: 0 auto;
   display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -161,6 +184,9 @@ header{
 
   width: 275px !important;
   height: 400px;
+}
+body.tinderesque{
+  height: 100vh;
 }
 
 form{
