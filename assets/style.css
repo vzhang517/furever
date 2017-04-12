@@ -26,7 +26,8 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 html{
-  background-color:rgba(47, 54, 64, 0.85);
+background-color: #35393e;
+background-image: url("images/test.png");
 }
 
 header{
@@ -92,7 +93,7 @@ header img{
 #searchCard{
     width: 600px;
     display: flex;
-   /* height: 100%;*/
+  background-color: #f8f6f6;
 }
 
 #resultsPage {
@@ -233,11 +234,11 @@ form{
 #searchCard{
   width: 100%;
   display: flex;
-  box-shadow: 10px 10px 25px rgb(29, 28, 26);
+  box-shadow: 10px 10px 25px 5px rgb(29, 28, 26);
     
 }
 .results{
-  box-shadow: 10px 10px 25px rgb(29, 28, 26);
+  box-shadow: 10px 10px 25px 5px  rgb(29, 28, 26);
 }
 div#search.row{
   margin-bottom: 0;
@@ -279,6 +280,7 @@ h2{
 
 button{
   background-color: rgba(126, 171, 186, 0.92) !important;
+  
 }
 
 button:hover{
