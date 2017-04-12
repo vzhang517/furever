@@ -1,5 +1,5 @@
 // only holds zip code for now
-
+var empty = false;
 var favoritesArr = [];
 tinderesque();
 $(document).ready(function() {
@@ -306,22 +306,20 @@ $(document).ready(function() {
 
             initialize();
             codeAddress(favoritesArr[i]);
-      
-
         }
-
-      
-
-
         // favorites page map
         setMarkers();
-
     });
 
     $("#results").click(function(event){
         event.preventDefault();
         $("#favoritesPage").css("display", "none");
-        $("#resultsPage").css("display", "flex");
+        if(empty){
+            $("#search").css("display", "flex");   
+        }else{
+          $("#resultsPage").css("display", "flex");  
+        }
+        
     }); 
 
 }); 
@@ -486,6 +484,7 @@ function tinderesque(){
           ev.animationName === 'yay') {
         //if the deck is empty, show favorites page
         if (!origin.querySelector('.item')) {
+            empty = true;
           fireCustomEvent('deckempty', {
             origin: origin.querySelector('button'),
             container: origin,

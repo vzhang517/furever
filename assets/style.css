@@ -107,6 +107,7 @@ header{
   margin-top: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -120,19 +121,24 @@ header{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
 }
-cardcontainer list row
+/*.cardcontainer .list .row{
 
+}
+*/
 /* List functionality */
 .list .cardlist {
   margin: 0;
   padding: 0;
+  margin-bottom: 20px;
 }
 .tinderesque .list .item {
   display: none;
 }
 .tinderesque .list .current {
   display: block;
+  padding: 20px;
 }
 
 /* Button designs */
@@ -260,10 +266,16 @@ background-color: #9DE0AD !important;
 }
 button.no{
   background-color: #C44D58 !important;
+  position: absolute;
+  bottom: 0;
+  left: 80px;
 }
 button.yes{
 
   background-color: #9DE0AD !important;
+  position: absolute;
+  bottom: 0;
+  right: 80px;
 }
 
 #map {
