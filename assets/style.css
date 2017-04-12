@@ -22,8 +22,6 @@ body{
   margin: 0;
   height: 100%;
   padding: 0;
- 
-  background-size: cover;
   color: #594F4F !important;
 }
 html{
@@ -31,7 +29,6 @@ html{
 }
 
 header{
-
   background-image: url("images/weimaraner-puppy-dog-snout-97082.jpeg");
   height: 100vh;
   background-size: cover;
@@ -45,11 +42,25 @@ header{
   text-shadow: 1px 0px 10px #000;
   background-color: transparent;
 }
+
 header img{
   width: 400px;
+};
+
+.select-wrapper{
+  margin-top: 20px;
+}
+.input-field.col label{
+  font-size: x-large;
+
 }
 
-
+.fa-lg{
+  margin-top: 10px;
+}
+.input-field label:not(.label-icon).active{
+  font-size: x-large;
+}
 .container{
   max-width: 970px;
   margin: 0 auto;
@@ -61,8 +72,11 @@ header img{
 .input-field input[type=search] {
   padding: 0;
   width: 100%;
+  font-size: large;
 }
-
+.input-field input[type=text]{
+  font-size: large;
+}
 #search {
   height: 100vh;
   display: flex;
@@ -79,12 +93,21 @@ header img{
 
 #resultsPage {
   display:none;
-  height: 100%;
+
+
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 #favoritesPage {
   display:none;
   height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
 }
 
@@ -106,7 +129,7 @@ header img{
 }
 
 .card .card-image {
-  height:200px;
+  height:300px;
   width: 100%;
   margin-top: 10px;
   display: flex;
@@ -114,8 +137,8 @@ header img{
   overflow: hidden;
 }
 
-.card .card-content {
-  padding:10px;
+#searchBox {
+  padding: 50px 40px 30px 40px;
 }
 .cardcontainer {
   padding: 10px;
@@ -125,6 +148,7 @@ header img{
   justify-content: center;
   flex-wrap: wrap;
 }
+cardcontainer list row
 
 /* List functionality */
 .list .cardlist {
@@ -154,8 +178,8 @@ header img{
   border: none;
   color: #fff;
   border-radius: 50% 50%;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   line-height: 30px;
   margin: 0 .5em;
   display: inline-block;
@@ -182,8 +206,10 @@ header img{
 }
 .card.results{
 
-  width: 275px !important;
-  height: 400px;
+  width: 400px;
+  height: 500px;
+  margin-left: 20px;
+
 }
 body.tinderesque{
   height: 100vh;
@@ -197,9 +223,13 @@ form{
 #searchCard{
     width: 100%;
     display: flex;
+    border-radius: 20px;
+    box-shadow: 0 0 25px #888888;
     
 }
-
+.card{
+  box-shadow: 0 0 25px #888888;
+}
 div#search.row{
   margin-bottom: 0;
   width: 100%;
