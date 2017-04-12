@@ -205,7 +205,7 @@ $(document).ready(function() {
 
                  // on click submit, hide search page and show results page
                 $("#search").css("display", "none");
-                $("#resultsPage").css("display", "inline"); 
+                $("#resultsPage").css("display", "flex"); 
                 //create a card for each dog 
 
                 dogResultsArray.forEach(function (dog, index) {
@@ -278,7 +278,7 @@ $(document).ready(function() {
 
     $("#newSearch").click(function(event){
         event.preventDefault();
-        $("#search").css("display", "inline");
+        $("#search").css("display", "flex");
         $("#resultsPage").css("display", "none");
         $("#reset").click();
         $("#favorited").html("");
@@ -288,7 +288,7 @@ $(document).ready(function() {
     });
     $("#newSearch2").click(function(event){
         $("#favoritesPage").css("display", "none");
-        $("#search").css("display", "inline");
+        $("#search").css("display", "flex");
         $("#reset").click();
         $("#favorited").html("");       
         deleteMarkers();
@@ -296,9 +296,9 @@ $(document).ready(function() {
     });
     $("#favorites").click(function(event){
         event.preventDefault();
-        $("#favoritesPage").css("display", "inline");
+        $("#favoritesPage").css("display", "flex");
         $("#resultsPage").css("display", "none");
-        $(".favorited").css("display","inline");
+        $(".favorited").css("display","flex");
 
 
         //for loop to loop through address of favoritesArray
@@ -321,7 +321,7 @@ $(document).ready(function() {
     $("#results").click(function(event){
         event.preventDefault();
         $("#favoritesPage").css("display", "none");
-        $("#resultsPage").css("display", "inline");
+        $("#resultsPage").css("display", "flex");
     }); 
 
 }); 
@@ -492,7 +492,7 @@ function tinderesque(){
             item: null
           });
           $("#resultsPage").css("display", "none");
-          $("#favoritesPage").css("display", "inline"); 
+          $("#favoritesPage").css("display", "flex"); 
           for (var i=0; i<favoritesArr.length; i++) {
             initialize();
             codeAddress(favoritesArr[i]);
