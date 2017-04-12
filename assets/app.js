@@ -212,14 +212,10 @@ $(document).ready(function() {
                     $('.materialboxed').materialbox();
 
                     // added attribute zip to try to grab zip code of current dog
-                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"<i class='material-icons right'>more_vert</i></span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         //calling geocoding and map function
                         initMap();
-                        // setTimeout(function(){ $(".card-reveal").css('display','none') }, 150);
-                    
-
-
-
+                       
                         function initMap() {
                             var address; 
                             // if no address or address is a po box, use zip 
@@ -229,30 +225,30 @@ $(document).ready(function() {
                             }else{
                                 address = dog.zip + " " + dog.address1;
                             }
-                            
+                            var center;
                             geocoder = new google.maps.Geocoder();
-                            var point = new google.maps.LatLng(-34.397, 150.644);
-                            // creating new map in map div 
-                            var map = new google.maps.Map(document.getElementById('map'+index), {
-
-                              zoom: 10,
-                              center: point,
-                            }); 
                             //geocode function passing parameter dog.zip as value for address key
                             geocoder.geocode({'address': address},function(results,status){
                                
-                                    // if results are found set the center of the map to our new location
-                                    if(status == google.maps.GeocoderStatus.OK){
-                                        map.setCenter(results[0].geometry.location);
-                                        //create a marker at this location too
-                                        var marker = new google.maps.Marker({
-                                            map:map, 
-                                            position: results[0].geometry.location
-                                        });
+                                // if results are found set the center of the map to our new location
+                                if(status == google.maps.GeocoderStatus.OK){
+                                    center = results[0].geometry.location;
+                                    map.setCenter(results[0].geometry.location);
+                                    //create a marker at this location too
+                                    var marker = new google.maps.Marker({
+                                        map:map, 
+                                        position: results[0].geometry.location
+                                    });
 
-                                    } else {
-                                        alert("problem: "+status);
-                                    }
+                                } else {
+                                    alert("problem: "+status);
+                                }
+                            });                
+                            // creating new map in map div 
+                            var map = new google.maps.Map(document.getElementById('map'+index), {
+                              zoom: 10,
+                            }); 
+                            google.maps.event.addListener(map, "idle", function() {map.setCenter(center);
                             });
                         };
 
@@ -362,7 +358,7 @@ $(document.body).on('click', '.rotateButton', function() {
   //initialized cluster map
   function initialize() {
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var latlng = new google.maps.LatLng(30.284724, -97.734218);
     var mapOptions = {
 
       zoom: 10,
