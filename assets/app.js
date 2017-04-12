@@ -1,4 +1,5 @@
 // only holds zip code for now
+
 var favoritesArr = [];
 tinderesque();
 $(document).ready(function() {
@@ -7,6 +8,8 @@ $(document).ready(function() {
         delay: 50
     });
     
+
+
     $("#submit").click(function(event) {
         event.preventDefault();
         //clear results before every search
@@ -212,6 +215,10 @@ $(document).ready(function() {
                     $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"</span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         //calling geocoding and map function
                         initMap();
+                        // setTimeout(function(){ $(".card-reveal").css('display','none') }, 150);
+                    
+
+
 
                         function initMap() {
                             var address; 
@@ -228,7 +235,7 @@ $(document).ready(function() {
                             // creating new map in map div 
                             var map = new google.maps.Map(document.getElementById('map'+index), {
 
-                              zoom: 15,
+                              zoom: 10,
                               center: point,
                             }); 
                             //geocode function passing parameter dog.zip as value for address key
@@ -258,17 +265,20 @@ $(document).ready(function() {
                                     }
                             });
                         };
+
                     //add class 'current' to first li of div id cards
+
                 }); $('#cards li:first').addClass('current'); 
                    
+
             } else {
                 Materialize.toast('No results, please modify search.', 3000);
             }
         });
 
     });
+             
 
-    
     //button functions 
     $(".header").click(function(event){
         event.preventDefault();
@@ -483,6 +493,7 @@ function tinderesque(){
       origin.classList.remove('yes');
 
       $("#favorited").append(origin.querySelector('.current'));
+
     }
     if (ev.animationName === 'nope') {
       origin.classList.remove('nope');
@@ -507,6 +518,8 @@ function tinderesque(){
         } else {
           //else add current to the next li 
           origin.querySelector('.item').classList.add('current');
+  
+
         }
       }
     }
