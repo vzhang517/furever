@@ -6,13 +6,28 @@ DARK BLUE #547980,
 TAUPE   #E8DDCB,
 DARK GREY#594F4F,
 */
+@font-face {
+    font-family: 'wendy_lpbold';
+    src: url('wendy_lp_bold-webfont.woff2') format('woff2'),
+         url('wendy_lp_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
-body, html{
+}
+
+*{
+  box-sizing: border-box;
+}
+body{
   margin: 0;
+  height: 100%;
   padding: 0;
-  background-color: rgb(44, 51, 60);
   color: #594F4F !important;
 }
+html{
+  background-color:rgba(47, 54, 64, 0.85);
+}
+
 header{
   background-image: url("images/weimaraner-puppy-dog-snout-97082.jpeg");
   height: 100vh;
@@ -21,16 +36,23 @@ header{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
   color: #dcd5d2;
-  text-shadow: 0px 0px 300px #000;
+  text-shadow: 1px 0px 10px #000;
   background-color: transparent;
 }
+
+header img{
+  width: 400px;
+};
+
 .select-wrapper{
   margin-top: 20px;
 }
 .input-field.col label{
   font-size: x-large;
+
 }
 
 .fa-lg{
@@ -40,6 +62,8 @@ header{
   font-size: x-large;
 }
 .container{
+  max-width: 970px;
+  margin: 0 auto;
   display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -69,10 +93,13 @@ header{
 
 #resultsPage {
   display:none;
+
+
   height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 
 #favoritesPage {
@@ -190,6 +217,9 @@ header{
   margin-left: 20px;
 
 }
+body.tinderesque{
+  height: 100vh;
+}
 
 form{
     display: flex;
@@ -292,6 +322,11 @@ footer{
   bottom:0 ;
   
 }
+/*.card-reveal{
+  display: block !important;
+  /*visibility: visible !important;
+
+}*/
 
 
 /*animations*/
