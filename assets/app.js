@@ -340,7 +340,7 @@ $(document.body).on('click', '.rotateButton', function() {
     if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "0") {
         $(this).siblings(".material-placeholder").find("img").rotate(90);
         $(this).siblings(".material-placeholder").find("img").attr("data-deg", "90");
-        cu
+        
 
     } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "90") {
         $(this).siblings(".material-placeholder").find("img").rotate(180);
