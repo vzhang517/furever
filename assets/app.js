@@ -39,9 +39,9 @@ $(document).ready(function() {
             'location': zipcode,
             'age': age,
             'size': size,
-            'count': 5
+            'count': '10'
         }, true);
-        console.log(queryURL);
+        
 
         $.ajax({
             url: queryURL,
@@ -51,10 +51,9 @@ $(document).ready(function() {
         }).done(function(response) {
             // if there is a response
             if (response.petfinder.pets) {
-                console.log(queryURL);
+                
                 var pets = response.petfinder.pets.pet;
-                console.log(pets);
-
+                
                 // Constructor for dog objects to collect individual info
                 var Dog = function(name, options, pics, size, age, breed, sex, address1, address2, city, email, phone, state, zip) {
 
@@ -96,8 +95,6 @@ $(document).ready(function() {
 
 
                     //console log options
-                    console.log("Name of dog: " + currentPet.name.$t);
-                    console.log("Size of dog: " + currentPet.size.$t);
 
                     if (currentPet.media.hasOwnProperty("photos"))  {
                         var thearrayOfDogPhotos = currentPet.media.photos.photo;
@@ -110,7 +107,7 @@ $(document).ready(function() {
                     } else {
                     dogPicArray.push("assets/images/furever_text_logo.png");
                     }
-                    console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
+                    
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
                     if (currentPet.contact.address1.hasOwnProperty('$t')) {
@@ -148,28 +145,18 @@ $(document).ready(function() {
                     } else
                         zip = "Not provided.";
 
-                    //console log contact info
-                    console.log("address1: " + address1);
-                    console.log("address2: " + address2);
-                    console.log("city: " + city);
-                    console.log("email: " + email);
-                    console.log("phone: " + phone);
-                    console.log("state: " + state);
-                    console.log("zip: " + zip);
-
+                    
+                    
                     var theNextArrayOfNope = currentPet.options;
 
                     var optionsArray = (theNextArrayOfNope.option);
 
-                    // console options
-                    console.log(theNextArrayOfNope);
-                    console.log(optionsArray);
-
+                
                     // check to see if options is an array (hence having more than one option), if so iterate through
                     if(Array.isArray(optionsArray)){
                     optionsArray.forEach(function(currentOption) {
                         dogOptions.push(" "+currentOption.$t);
-                        console.log("Info about dog: " + currentOption.$t);
+                        
                     });
                     // if not an array, and also not undefined (empty), just display value found in object
                }else if(optionsArray !== undefined){
@@ -182,19 +169,18 @@ $(document).ready(function() {
                     var breedsArray = theArrayToBreed.breed;
 
                     // console variables
-                    console.log(theArrayToBreed);
-                    console.log(breedsArray);
+                    
 
                     // check to see if breeds is an array (hence having more than one option), if so iterate through
                     if(Array.isArray(breedsArray)){
                     breedsArray.forEach(function(currentOption) {
                         dogBreed.push(" "+currentOption.$t);
-                        console.log("dog breed: " + currentOption.$t);
+                        
                     });
                     // if not an array, and also not undefined (empty), just display value found in object
                }else if(breedsArray !== undefined){
                         dogBreed.push(breedsArray.$t);
-                        console.log("dog breed: " + breedsArray.$t);
+                        
                     }
 
                     // create a new dog object for every pet and their info using the Dog constructor
@@ -202,7 +188,7 @@ $(document).ready(function() {
 
                     dogResultsArray.push(newDog);
                 });
-                console.log(dogResultsArray);
+                
 
                  // on click submit, hide search page and show results page
                 $("#search").css("display", "none");
@@ -216,7 +202,7 @@ $(document).ready(function() {
 
                     // added attribute zip to try to grab zip code of current dog
 
-                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"<i class='material-icons right'>more_vert</i></span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
+                    $("#cards").append("<li class='item' zip='"+dog.zip + "' address='"+dog.address1 +"'><div class='card sticky-action results'><div class='card-image' style='overflow:hidden'><img class='materialboxed responsive-img' data-deg='0' src='"+dog.pics[0]+"'><button class='rotateButton btn-floating'><i class='material-icons'>replay</i></div><div class='card-content activator'><span class='card-title activator'><i class='fa fa-paw'></i> "+dog.name+"<i class='material-icons right'>more_vert</i></span><p>Breed: "+dog.breed+"<br>Age: "+dog.age+"<br>Size: "+dog.size+"<br>Sex: "+dog.sex+"<br>More info: "+dog.options+"</p></div><div class='card-reveal'><span class='card-title'><i class='fa fa-paw'></i> "+dog.name+"</span><p>"+dog.address1+"<br>"+dog.city+", "+dog.state+" "+dog.zip+"<br>"+dog.email+"<br>"+dog.phone+"</p> <div id='map"+index+"' style='height:250px;width:100%'></div></div></div></li>");
                         //calling geocoding and map function
                         initMap();
                        
@@ -241,13 +227,20 @@ $(document).ready(function() {
                                     center = results[0].geometry.location;
                                     map.setCenter(results[0].geometry.location);
                                     //create a marker at this location too
+                                    var icon = {
+                                    url: "assets/images/furever_logo_small_black.png", // url
+                                    scaledSize: new google.maps.Size(25, 25), // scaled size
+                                    origin: new google.maps.Point(0,0), // origin
+                                    anchor: new google.maps.Point(0, 0) // anchor
+                                    };       
                                     var marker = new google.maps.Marker({
                                         map:map, 
-                                        position: results[0].geometry.location
+                                        position: results[0].geometry.location,
+                                        icon: icon
                                     });
 
                                 } else {
-                                    alert("problem: "+status);
+                                    // alert("problem: "+status);
                                 }
                             });                
                             // creating new map in map div 
@@ -339,7 +332,7 @@ $(document).ready(function() {
 
 /////working with dynamically generated content so need to call function below/////////
 $(document.body).on('click', '.rotateButton', function() {
-    console.log('clicked');
+    
     if(!$(this).siblings(".material-placeholder").find("img").hasClass("active")) {
         $(this).parent().css("overflow", "hidden");
                     }
@@ -347,7 +340,7 @@ $(document.body).on('click', '.rotateButton', function() {
     if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "0") {
         $(this).siblings(".material-placeholder").find("img").rotate(90);
         $(this).siblings(".material-placeholder").find("img").attr("data-deg", "90");
-        console.log(this);
+        
 
     } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "90") {
         $(this).siblings(".material-placeholder").find("img").rotate(180);
@@ -383,17 +376,26 @@ $(document.body).on('click', '.rotateButton', function() {
   function codeAddress(x) {
     var address = x;
     geocoder.geocode( {'address': address}, function(results, status) {
-        console.log("I'm initializing!");
+        
       if (status == google.maps.GeocoderStatus.OK) {
         mapCluster.setCenter(results[0].geometry.location);
+
+        var icon = {
+        url: "assets/images/furever_logo_small_black.png", // url
+        scaledSize: new google.maps.Size(25, 25), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+        }; 
+
         var marker = new google.maps.Marker({
             map: mapCluster,
-            position: results[0].geometry.location
+            position: results[0].geometry.location,
+            icon: icon
         });
       } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        // alert('Geocode was not successful for the following reason: ' + status);
       }
-    console.log(results); });
+     });
   }
   function setMarkers(){
     for (var i=0; i<favoritesArr.length; i++) {
@@ -429,8 +431,7 @@ function tinderesque(){
         );
       }
       if (button.className === 'yes') {
-        console.log($('li.item.current').attr("zip"));
-        console.log($('li.item.current').attr("address"));
+        
 
         if($('li.item.current').attr("address")==="Address not provided." || $('li.item.current').attr("address").indexOf("PO") != -1 || $('li.item.current').attr("address").indexOf("P.O.") != -1){
             favoritesArr.push($('li.item.current').attr("zip"));
@@ -439,7 +440,7 @@ function tinderesque(){
 
         favoritesArr.push($('li.item.current').attr("zip")+ " " + $('li.item.current').attr("address"));
         }
-        console.log(favoritesArr);
+       
         button.parentNode.classList.add('yes');
         animating = true;
         fireCustomEvent('yepcard',
