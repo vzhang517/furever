@@ -41,7 +41,7 @@ $(document).ready(function() {
             'size': size,
             'count': 5
         }, true);
-        console.log(queryURL);
+        
 
         $.ajax({
             url: queryURL,
@@ -51,10 +51,9 @@ $(document).ready(function() {
         }).done(function(response) {
             // if there is a response
             if (response.petfinder.pets) {
-                console.log(queryURL);
+                
                 var pets = response.petfinder.pets.pet;
-                console.log(pets);
-
+                
                 // Constructor for dog objects to collect individual info
                 var Dog = function(name, options, pics, size, age, breed, sex, address1, address2, city, email, phone, state, zip) {
 
@@ -96,8 +95,6 @@ $(document).ready(function() {
 
 
                     //console log options
-                    console.log("Name of dog: " + currentPet.name.$t);
-                    console.log("Size of dog: " + currentPet.size.$t);
 
                     if (currentPet.media.hasOwnProperty("photos"))  {
                         var thearrayOfDogPhotos = currentPet.media.photos.photo;
@@ -110,7 +107,7 @@ $(document).ready(function() {
                     } else {
                     dogPicArray.push("assets/images/furever_text_logo.png");
                     }
-                    console.log("Dog Pic Array: " + JSON.stringify(dogPicArray));
+                    
                     //////////////// Contact info pulled here (under forEach function) and assigned to relevant variable if key ($t) exists/////////
                     /////////////////// If key does not exist then variable is assigned a "Not provided" message////
                     if (currentPet.contact.address1.hasOwnProperty('$t')) {
@@ -148,28 +145,18 @@ $(document).ready(function() {
                     } else
                         zip = "Not provided.";
 
-                    //console log contact info
-                    console.log("address1: " + address1);
-                    console.log("address2: " + address2);
-                    console.log("city: " + city);
-                    console.log("email: " + email);
-                    console.log("phone: " + phone);
-                    console.log("state: " + state);
-                    console.log("zip: " + zip);
-
+                    
+                    
                     var theNextArrayOfNope = currentPet.options;
 
                     var optionsArray = (theNextArrayOfNope.option);
 
-                    // console options
-                    console.log(theNextArrayOfNope);
-                    console.log(optionsArray);
-
+                
                     // check to see if options is an array (hence having more than one option), if so iterate through
                     if(Array.isArray(optionsArray)){
                     optionsArray.forEach(function(currentOption) {
                         dogOptions.push(" "+currentOption.$t);
-                        console.log("Info about dog: " + currentOption.$t);
+                        
                     });
                     // if not an array, and also not undefined (empty), just display value found in object
                }else if(optionsArray !== undefined){
@@ -182,19 +169,18 @@ $(document).ready(function() {
                     var breedsArray = theArrayToBreed.breed;
 
                     // console variables
-                    console.log(theArrayToBreed);
-                    console.log(breedsArray);
+                    
 
                     // check to see if breeds is an array (hence having more than one option), if so iterate through
                     if(Array.isArray(breedsArray)){
                     breedsArray.forEach(function(currentOption) {
                         dogBreed.push(" "+currentOption.$t);
-                        console.log("dog breed: " + currentOption.$t);
+                        
                     });
                     // if not an array, and also not undefined (empty), just display value found in object
                }else if(breedsArray !== undefined){
                         dogBreed.push(breedsArray.$t);
-                        console.log("dog breed: " + breedsArray.$t);
+                        
                     }
 
                     // create a new dog object for every pet and their info using the Dog constructor
@@ -202,7 +188,7 @@ $(document).ready(function() {
 
                     dogResultsArray.push(newDog);
                 });
-                console.log(dogResultsArray);
+                
 
                  // on click submit, hide search page and show results page
                 $("#search").css("display", "none");
@@ -346,7 +332,7 @@ $(document).ready(function() {
 
 /////working with dynamically generated content so need to call function below/////////
 $(document.body).on('click', '.rotateButton', function() {
-    console.log('clicked');
+    
     if(!$(this).siblings(".material-placeholder").find("img").hasClass("active")) {
         $(this).parent().css("overflow", "hidden");
                     }
@@ -354,7 +340,7 @@ $(document.body).on('click', '.rotateButton', function() {
     if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "0") {
         $(this).siblings(".material-placeholder").find("img").rotate(90);
         $(this).siblings(".material-placeholder").find("img").attr("data-deg", "90");
-        console.log(this);
+        
 
     } else if ($(this).siblings(".material-placeholder").find("img").attr("data-deg") === "90") {
         $(this).siblings(".material-placeholder").find("img").rotate(180);
@@ -390,7 +376,7 @@ $(document.body).on('click', '.rotateButton', function() {
   function codeAddress(x) {
     var address = x;
     geocoder.geocode( {'address': address}, function(results, status) {
-        console.log("I'm initializing!");
+        
       if (status == google.maps.GeocoderStatus.OK) {
         mapCluster.setCenter(results[0].geometry.location);
 
@@ -409,7 +395,7 @@ $(document.body).on('click', '.rotateButton', function() {
       } else {
         // alert('Geocode was not successful for the following reason: ' + status);
       }
-    console.log(results); });
+     });
   }
   function setMarkers(){
     for (var i=0; i<favoritesArr.length; i++) {
@@ -445,8 +431,7 @@ function tinderesque(){
         );
       }
       if (button.className === 'yes') {
-        console.log($('li.item.current').attr("zip"));
-        console.log($('li.item.current').attr("address"));
+        
 
         if($('li.item.current').attr("address")==="Address not provided." || $('li.item.current').attr("address").indexOf("PO") != -1 || $('li.item.current').attr("address").indexOf("P.O.") != -1){
             favoritesArr.push($('li.item.current').attr("zip"));
@@ -455,7 +440,7 @@ function tinderesque(){
 
         favoritesArr.push($('li.item.current').attr("zip")+ " " + $('li.item.current').attr("address"));
         }
-        console.log(favoritesArr);
+       
         button.parentNode.classList.add('yes');
         animating = true;
         fireCustomEvent('yepcard',
