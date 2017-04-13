@@ -188,13 +188,17 @@ header img{
   background-color: #45ADA8;
   border: none;
   color: #fff;
-  border-radius: 50% 50%;
-  width: 50px;
-  height: 50px;
+/*  border-radius: 50% 50%;*/
+  width: 200px;
+  height: 65px;
   line-height: 30px;
   margin: 0 .5em;
   display: inline-block;
+  box-shadow: 10px 10px 25px 5px rgb(29, 28, 26);
 }
+
+
+
 .cardcontainer button:focus {
   outline: 0;
   background-color: #9DE0AD;
@@ -271,7 +275,14 @@ h2{
  .rotateButton {
     position: absolute;
     bottom: 2px;
-    right: 0;    
+    right: 0;   
+
+  border-radius: 50% 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  line-height: 30px !important;
+  margin: 0 .5em !important;
+  display: inline-block !important; 
 }
 
 .btn-floating i {
@@ -303,14 +314,14 @@ button.no{
   background-color: #C44D58 !important;
   position: absolute;
   bottom: 0;
-  left: 80px;
+  right: 133px;
 }
 button.yes{
 
   background-color: #9DE0AD !important;
   position: absolute;
   bottom: 0;
-  right: 80px;
+  left: 152px;
 }
 
 #map {
