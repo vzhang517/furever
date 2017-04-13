@@ -254,7 +254,7 @@ $(document).ready(function() {
                                     });
 
                                 } else {
-                                    alert("problem: "+status);
+                                    // alert("problem: "+status);
                                 }
                             });                
                             // creating new map in map div 
@@ -407,7 +407,7 @@ $(document.body).on('click', '.rotateButton', function() {
             icon: icon
         });
       } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        // alert('Geocode was not successful for the following reason: ' + status);
       }
     console.log(results); });
   }
