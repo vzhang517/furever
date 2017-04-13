@@ -236,18 +236,17 @@ $(document).ready(function() {
                             //geocode function passing parameter dog.zip as value for address key
                             geocoder.geocode({'address': address},function(results,status){
                                
-                               var icon = {
-                                    url: "assets/images/furever_logo_small_black.png", // url
-                                    scaledSize: new google.maps.Size(25, 25), // scaled size
-                                    origin: new google.maps.Point(0,0), // origin
-                                    anchor: new google.maps.Point(0, 0) // anchor
-                                };
-
                                 // if results are found set the center of the map to our new location
                                 if(status == google.maps.GeocoderStatus.OK){
                                     center = results[0].geometry.location;
                                     map.setCenter(results[0].geometry.location);
                                     //create a marker at this location too
+                                    var icon = {
+                                    url: "assets/images/furever_logo_small_black.png", // url
+                                    scaledSize: new google.maps.Size(25, 25), // scaled size
+                                    origin: new google.maps.Point(0,0), // origin
+                                    anchor: new google.maps.Point(0, 0) // anchor
+                                    };       
                                     var marker = new google.maps.Marker({
                                         map:map, 
                                         position: results[0].geometry.location,
@@ -393,13 +392,15 @@ $(document.body).on('click', '.rotateButton', function() {
     geocoder.geocode( {'address': address}, function(results, status) {
         console.log("I'm initializing!");
       if (status == google.maps.GeocoderStatus.OK) {
-var icon = {
+        mapCluster.setCenter(results[0].geometry.location);
+
+        var icon = {
         url: "assets/images/furever_logo_small_black.png", // url
         scaledSize: new google.maps.Size(25, 25), // scaled size
         origin: new google.maps.Point(0,0), // origin
         anchor: new google.maps.Point(0, 0) // anchor
-        };        
-        mapCluster.setCenter(results[0].geometry.location);
+        }; 
+
         var marker = new google.maps.Marker({
             map: mapCluster,
             position: results[0].geometry.location,
