@@ -1,4 +1,4 @@
-![alt text](/assets/images/furever_text_logo)
+![alt text](/assets/images/furever_text_logo.png)
 ======
 
 *Furever* matches potential owers with dogs currently at a shelter near their location.
